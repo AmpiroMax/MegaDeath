@@ -1,1 +1,1 @@
-# -Master of Dungeons-
+# Master of Dungeons
