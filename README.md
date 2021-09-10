@@ -1,3 +1,1 @@
-# Master of Dungeons
-
-Repo was successfully cloned and modifyed 
+# Evgrafov's branch.
