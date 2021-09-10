@@ -11,3 +11,8 @@
 6. [Patterns.](https://refactoring.guru/ru/refactoring)
 
 ======================================================================
+
+## Diagrams:
+
+We use a 'diagram editor' to visualize all part of our program. Here you will find all block diagrams and dependencies which take place in our code. 
+[Folde with diagrams.](https://github.com/AmpiroMax/MegaDeath/tree/master/diagrams)
