@@ -8,7 +8,7 @@
 3. [Introduction to Algorithms. (Thomas H. Cormen)](https://drive.google.com/file/d/1tA1qFIm5k6muvlkn_PXm--JzkkEpGqcG/view?usp=sharing)
 4. [SFML documentation.](https://www.sfml-dev.org/tutorials/2.5/)
 5. [Ravesli.](https://ravesli.com/uroki-cpp/)
-6. [Patterns.](https://refactoring.guru/ru/refactoring)
+6. [Patterns.](https://refactoring.guru/ru/design-patterns)
 
 ======================================================================
 
