@@ -22,6 +22,7 @@ INCLUDEPATH += $$PWD/SFML/include/
 DEPENDPATH +=  $$PWD/SFML/include/
 
 SOURCES += \
+    game.cpp \
     main.cpp \
     mainwindow.cpp \
     player.cpp \
@@ -32,6 +33,7 @@ HEADERS += \
     IObj.h \
     IRender.h \
     IUnit.h \
+    game.h \
     mainwindow.h \
     player.h \
     structs.h \
