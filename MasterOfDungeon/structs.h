@@ -13,6 +13,18 @@ struct pos
     float y;
 };
 
+struct ipos
+{
+    int x;
+    int y;
+};
+
+struct uipos
+{
+    size_t x;
+    size_t y;
+};
+
 struct stats
 {
     float health;

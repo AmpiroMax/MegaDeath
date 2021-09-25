@@ -12,20 +12,38 @@
 #include "structs.h"
 
 typedef std::vector<IUnit *> UnitChunk;
-typedef std::vector<std::vector<UnitChunk>> UnitMap;
+typedef std::vector<std::vector<int>> GraphicChunk;
 
-typedef std::vector<char> GraphicChunk;
-typedef std::vector<std::vector<GraphicChunk>> GraphicMap;
+class Chunk;
+typedef std::vector<std::vector<Chunk>> Map;
+
+// Интересным вопросом будет, почему это класс, а не отдельная структура
+// в дальнейшем возможно на чанка повясятся какие-либо доп обязанности
+// по типу хранения или управления своими данными.
+// Не отрицается возможность замены класса на структуру
+class Chunk
+{
+  private:
+    UnitChunk units; // находящиеся на чанке юниты
+
+  public:
+    GraphicChunk landscape; // графическая составляющая чанка
+};
 
 class WorldMap
 {
   private:
-    UnitMap *globalUnitMap; // карта для хранения игровых, отрисовываемых объектов
-    GraphicMap *globalGraphicMap; // ландшавт карты
+    Map globalMap; // двумерный массив чанков, который хранит всю игровую карту целиком
 
-    size_t localMapSize = 5;             // Измеряется в Чанках
-    std::pair<size_t, size_t> playerPos; // i, j индексы номера Чанка,
-                                         // в котором сейча находится игрок
+    // Измеряются в чанках
+    // Части карты вокруг чанка игрока
+    size_t localMapSize = 7;  // часть карты, которую надо просчитывать
+                              // на каждом фрейме
+    size_t renderMapSize = 5; // часть карты, которую надо отрисовывать
+                              // на каждом фрейме
+
+    gym::uipos playerPos; // i, j индексы номера Чанка,
+                          // в котором сейча находится игрок
 
     std::string mapFileName; // файл, из которого будет считываться ландшавт карты
 
@@ -36,8 +54,13 @@ class WorldMap
     // возвращает код ошибки
     int initialize();
 
-    UnitMap *getUnitMap() { return globalUnitMap; }
-    GraphicMap *getGraphicMap() { return globalGraphicMap; }
+    // Возвращает те чанки, юниты которых должны обновить свои состояния.
+    // Часть карты, обрабатываемая в данный момент игровым движком.
+    Map getLocalMap();
+
+    // Возвращает те чанки, которые должны быть отрисованы на экран.
+    // Часть карты, отрисовываемая в данном фрейме
+    Map getRenderMap();
 
     // Обновляет положение Юнитов
     // Просматривает всех Юнитов в локальной части карты (той, где сейчас игрок)
