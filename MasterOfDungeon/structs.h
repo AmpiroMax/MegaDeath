@@ -4,7 +4,7 @@
 #include <string>
 #include <vector>
 
-namespace gym
+namespace GYM
 {
 
 struct pos
@@ -39,6 +39,6 @@ struct inventory
     std::vector<size_t> objects;
 };
 
-} // namespace gym
+} // namespace GYM
 
 #endif // STRUCTS_H

@@ -42,7 +42,7 @@ class WorldMap
     size_t renderMapSize = 5; // часть карты, которую надо отрисовывать
                               // на каждом фрейме
 
-    gym::uipos playerPos; // i, j индексы номера Чанка,
+    GYM::uipos playerPos; // i, j индексы номера Чанка,
                           // в котором сейча находится игрок
 
     std::string mapFileName; // файл, из которого будет считываться ландшавт карты
