@@ -1,3 +1,7 @@
+#include <cassert>
+
+
+#include "tile_constants.h"
 #include "tile.h"
 
 
@@ -5,7 +9,32 @@ Tile::Tile(std::uint16_t tile):
 	_tile(tile) {}
 
 
-Tile::Tile(): Tile(0x0000) {}
+Tile::Tile(): Tile(NIL) {}
+
+
+void Tile::setKnowledgeBit(bool knowlege)
+{
+	(knowlege) ? _tile |= KNOWLEDGE_MASK : _tile &= (~KNOWLEDGE_MASK);
+}
+
+
+void Tile::setPassabilityBit(bool passible)
+{
+	(passible) ? _tile |= PASSABILITY_MASK : _tile &= (~PASSABILITY_MASK);
+}
+
+
+void Tile::setTextureId(std::uint16_t id)
+{
+	_replaceGroupOfBits(TEXTURE_ID_MASK, id, MAX_ID, TEXTURE_SHIFT);
+}
+
+
+void Tile::setIlluminationLevel(std::uint16_t level)
+{
+	_replaceGroupOfBits(ILLUMINATION_MASK, level, 
+		MAX_ILLUMINATION, ILLUMINATION_SHIFT);
+}
 
 
 bool Tile::isKnown() const
@@ -22,11 +51,21 @@ bool Tile::isPassible() const
 
 std::uint16_t Tile::getTextureId() const
 {
-	return ((_tile & TEXTURE_ID_MASK) >> 5);
+	return ((_tile & TEXTURE_ID_MASK) >> TEXTURE_SHIFT);
 }
 
 
 std::uint16_t Tile::getIlluminationLevel() const
 {
-	return ((_tile & ILLUMINATION_MASK) >> 2);
+	return ((_tile & ILLUMINATION_MASK) >> ILLUMINATION_SHIFT);
+}
+
+
+void Tile::_replaceGroupOfBits(std::uint16_t targetBits, std::uint16_t newValue,
+	std::uint16_t maxValue, std::uint16_t shift)
+{
+	assert(newValue <= maxValue, ":ERROR: maximum value is exceeded");
+
+	_tile &= (~targetBits);
+	_tile |= (newValue << shift);
 }

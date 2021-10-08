@@ -5,12 +5,6 @@
 #include <cstdint>
 
 
-constexpr std::uint16_t PASSABILITY_MASK = 0x8000;
-constexpr std::uint16_t TEXTURE_ID_MASK = 0x7FE0;
-constexpr std::uint16_t ILLUMINATION_MASK = 0x001C;
-constexpr std::uint16_t KNOWLEDGE_MASK = 0x0002;
-
-
 class Tile
 {
 public:
@@ -18,8 +12,10 @@ public:
 	explicit Tile();
 	explicit Tile(std::uint16_t tile);
 
-	Tile(const Tile&) = delete;
-	Tile& operator= (const Tile&) = delete;
+	void setKnowledgeBit(bool knowledge);
+	void setPassabilityBit(bool passible);
+	void setTextureId(std::uint16_t id);
+	void setIlluminationLevel(std::uint16_t level);
 
 	bool isKnown() const;
 	bool isPassible() const;
@@ -29,6 +25,9 @@ public:
 private:
 
 	std::uint16_t _tile;
+
+	void _replaceGroupOfBits(std::uint16_t targetBits, std::uint16_t newValue,
+		std::uint16_t maxValue, std::uint16_t shift);
 };
 
 
