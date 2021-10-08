@@ -7,6 +7,7 @@
 #include <QByteArray>
 #include <QKeyEvent>
 #include <QPixmap>
+#include <math.h>
 
 constexpr size_t tileSize = 32;  // 64 пикселя - ширина и сторона
 constexpr size_t chunkSize = 16; // 16 тайликов - ширина и сторона
@@ -34,6 +35,16 @@ void Canvas::onUpdate()
 {
     clear(clearColor);
     drawMap();
+
+    float x = targetPos.first;
+    float y = targetPos.second;
+
+    float _x = view.getCenter().x;
+    float _y = view.getCenter().y;
+
+    if (sqrt((x - _x) * (x - _x) + (y - _y) * (y - _y)) >
+        (targetVelocity.first * targetVelocity.first + targetVelocity.second * targetVelocity.second))
+        view.move(targetVelocity.first, targetVelocity.second);
     this->setView(view);
 }
 
@@ -79,6 +90,9 @@ void Canvas::showEvent(QShowEvent *)
     connect(&keyHandler, &KeyBoardHandler::moveKeyPressed, this, &Canvas::onMoveKey);
     connect(&keyHandler, &KeyBoardHandler::zoomKeyPressed, this, &Canvas::onZoomKey);
 
+    // Подключаем сигналы мышки
+    connect(&mouseHandler, &MouseHandler::trackMouse, this, &Canvas::onMouseClicked);
+
     isInited = true;
     clearColor = sf::Color(100, 100, 100);
 }
@@ -102,8 +116,8 @@ void Canvas::onCloseKey()
 
 void Canvas::onMoveKey(int key)
 {
-    float dx = 3;
-    float dy = 3;
+    float dx = targetVelocity.first;
+    float dy = targetVelocity.second;
 
     if (key == Qt::Key_A)
         view.move(-dx, 0);
@@ -126,11 +140,18 @@ void Canvas::onZoomKey(int key)
     repaint();
 }
 
+void Canvas::onMouseClicked(int x, int y)
+{
+    printf("onMouse \n");
+    targetPos = std::make_pair(x, y);
+}
+
 Canvas::Canvas(QWidget *parent, uint frameTime)
     : QWidget(parent),
       sf::RenderWindow(sf::VideoMode(800, 600), "SFML|QT Canvas Test", sf::Style::Fullscreen, sf::ContextSettings(24)),
       gameMap(),
       keyHandler(this),
+      mouseHandler(this),
       isInited(false)
 {
     // Атрибуты для отрисовки изображения на виджет
@@ -138,4 +159,9 @@ Canvas::Canvas(QWidget *parent, uint frameTime)
     setAttribute(Qt::WA_OpaquePaintEvent);
     setAttribute(Qt::WA_NoSystemBackground);
     timer.setInterval(frameTime);
+
+    targetPos.first = view.getCenter().x;
+    targetPos.second = view.getCenter().y;
+
+    targetVelocity = std::make_pair(3, 3);
 }

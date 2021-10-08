@@ -6,7 +6,8 @@
 #include <QWidget>
 #include <SFML/Graphics.hpp>
 
-#include "keyboardhandler.h"
+#include "Handlers/keyboardhandler.h"
+#include "Handlers/mousehandler.h"
 #include "worldmap.h"
 
 class Canvas : public QWidget, public sf::RenderWindow
@@ -23,7 +24,11 @@ class Canvas : public QWidget, public sf::RenderWindow
 
     WorldMap gameMap;
     KeyBoardHandler keyHandler;
+    MouseHandler mouseHandler;
     bool isInited;
+
+    std::pair<int, int> targetPos;
+    std::pair<int, int> targetVelocity;
 
   private:
     void onInit();
@@ -40,6 +45,8 @@ class Canvas : public QWidget, public sf::RenderWindow
     void onCloseKey();
     void onMoveKey(int);
     void onZoomKey(int);
+
+    void onMouseClicked(int, int);
 
   signals:
     void closeWindow();

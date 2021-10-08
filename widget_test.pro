@@ -16,6 +16,7 @@ DEPENDPATH +=  $$PWD/SFML/include/
 
 SOURCES += \
     Handlers/keyboardhandler.cpp \
+    Handlers/mousehandler.cpp \
     Render/canvas.cpp \
     Render/sfmlwidget.cpp \
     main.cpp \
@@ -24,6 +25,7 @@ SOURCES += \
 
 HEADERS += \
     Handlers/keyboardhandler.h \
+    Handlers/mousehandler.h \
     Render/canvas.h \
     Render/sfmlwidget.h \
     worldmap.h
