@@ -22,25 +22,30 @@ INCLUDEPATH += $$PWD/SFML/include/
 DEPENDPATH +=  $$PWD/SFML/include/
 
 SOURCES += \
-    game.cpp \
-    main.cpp \
-    mainwindow.cpp \
-    player.cpp \
-    worldmap.cpp
+    Game/game.cpp \
+    Player/player.cpp \
+    Render/mainwindow.cpp \
+    Structures/tile.cpp \
+    WorldMap/worldmap.cpp \
+    main.cpp
+
 
 HEADERS += \
-    IDrawObj.h \
-    IObj.h \
-    IRender.h \
-    IUnit.h \
-    game.h \
-    mainwindow.h \
-    player.h \
-    structs.h \
-    worldmap.h
+    Game/game.h \
+    Interfaces/IDrawObj.h \
+    Interfaces/IObj.h \
+    Interfaces/IRender.h \
+    Interfaces/IUnit.h \
+    Player/player.h \
+    Render/mainwindow.h \
+    Structures/structs.h \
+    Structures/tile.h \
+    Structures/tile_constants.h \
+    WorldMap/worldmap.h
 
 FORMS += \
-    mainwindow.ui
+    Render/mainwindow.ui
+
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
