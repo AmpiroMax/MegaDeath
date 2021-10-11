@@ -24,7 +24,6 @@ DEPENDPATH +=  $$PWD/SFML/include/
 SOURCES += \
     Game/game.cpp \
     Player/player.cpp \
-    Render/mainwindow.cpp \
     Structures/tile.cpp \
     WorldMap/worldmap.cpp \
     main.cpp
@@ -37,14 +36,12 @@ HEADERS += \
     Interfaces/IRender.h \
     Interfaces/IUnit.h \
     Player/player.h \
-    Render/mainwindow.h \
     Structures/structs.h \
     Structures/tile.h \
     Structures/tile_constants.h \
     WorldMap/worldmap.h
 
-FORMS += \
-    Render/mainwindow.ui
+FORMS +=
 
 
 # Default rules for deployment.

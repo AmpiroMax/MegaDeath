@@ -1,8 +1,8 @@
 #ifndef GAME_H
 #define GAME_H
 
-#include "IUnit.h"
-#include "worldmap.h"
+#include "Interfaces/IUnit.h"
+#include "WorldMap/worldmap.h"
 
 class Game
 {

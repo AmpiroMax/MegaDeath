@@ -1,8 +1,8 @@
 #ifndef IUNIT_H
 #define IUNIT_H
 
-#include "IDrawObj.h"
-#include "structs.h"
+#include "Interfaces/IDrawObj.h"
+#include "Structures/structs.h"
 
 class IUnit : public IDrawObj
 {

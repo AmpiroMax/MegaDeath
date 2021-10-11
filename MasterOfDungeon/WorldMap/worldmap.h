@@ -8,8 +8,8 @@
 
 */
 
-#include "IUnit.h"
-#include "structs.h"
+#include "Interfaces/IUnit.h"
+#include "Structures/structs.h"
 
 typedef std::vector<IUnit *> UnitChunk;
 typedef std::vector<std::vector<int>> GraphicChunk;
