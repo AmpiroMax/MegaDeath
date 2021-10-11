@@ -1,6 +1,3 @@
-#include <cassert>
-
-
 #include "tile_constants.h"
 #include "tile.h"
 
@@ -139,8 +136,9 @@ void Tile::_replaceGroupOfBits(std::uint16_t targetBits, std::uint16_t newValue,
 	:return: ничего
 */
 {
-	assert(newValue <= maxValue, ":ERROR: maximum value is exceeded");
-
-	_tile &= (~targetBits);
-	_tile |= (newValue << shift);
+	if (newValue <= maxValue)
+	{
+		_tile &= (~targetBits);
+		_tile |= (newValue << shift);
+	}
 }
