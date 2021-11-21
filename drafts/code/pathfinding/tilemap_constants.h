@@ -7,15 +7,15 @@
 //
 
 
-using TileMatrix = std::vector<std::vector<Tile>>;			// двойной массив тайлов
-using CellVector = std::vector<std::pair<int, int>>;		// вектор координат ячеек	
-															// first - номер строки, second - номер столбца
-using Cell = std::pair<int, int>;							// пара: first - номер строки, second - номер столбца
-using Shape = std::pair<int, int>;							// пара: first - длина, second - ширина
+using TileMatrix = std::vector<std::vector<Tile>>;			// РґРІРѕР№РЅРѕР№ РјР°СЃСЃРёРІ С‚Р°Р№Р»РѕРІ
+using CellVector = std::vector<std::pair<int, int>>;		// РІРµРєС‚РѕСЂ РєРѕРѕСЂРґРёРЅР°С‚ СЏС‡РµРµРє	
+															// first - РЅРѕРјРµСЂ СЃС‚СЂРѕРєРё, second - РЅРѕРјРµСЂ СЃС‚РѕР»Р±С†Р°
+using Cell = std::pair<int, int>;							// РїР°СЂР°: first - РЅРѕРјРµСЂ СЃС‚СЂРѕРєРё, second - РЅРѕРјРµСЂ СЃС‚РѕР»Р±С†Р°
+using Shape = std::pair<int, int>;							// РїР°СЂР°: first - РґР»РёРЅР°, second - С€РёСЂРёРЅР°
 using QueueNode = std::pair<double, Cell>;
 
 
-constexpr Shape ELEMENTARY_SHAPE(0, 0);						// ноль строк, ноль столбцов == пустая карта
+constexpr Shape ELEMENTARY_SHAPE(0, 0);						// РЅРѕР»СЊ СЃС‚СЂРѕРє, РЅРѕР»СЊ СЃС‚РѕР»Р±С†РѕРІ == РїСѓСЃС‚Р°СЏ РєР°СЂС‚Р°
 constexpr Cell SIGNAL_CELL(-1, -1);
 
 
