@@ -4,6 +4,9 @@
 #include <utility>
 
 
+//
+
+
 using TileMatrix = std::vector<std::vector<Tile>>;			// двойной массив тайлов
 using CellVector = std::vector<std::pair<int, int>>;		// вектор координат €чеек	
 															// first - номер строки, second - номер столбца
