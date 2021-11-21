@@ -3,6 +3,7 @@
 
 
 #include <cstdint>
+#include <fstream>
 
 
 class Tile
@@ -21,6 +22,9 @@ public:
 	bool isPassible() const;
 	std::uint16_t getTextureId() const;
 	std::uint16_t getIlluminationLevel() const;
+
+	friend std::ostream& operator << (std::ostream& output, const Tile& tile);
+	friend std::istream& operator >> (std::istream& input, Tile& tile);
 
 private:
 

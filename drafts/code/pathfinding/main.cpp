@@ -15,22 +15,11 @@ void printCells(const CellVector& cells)
 
 int main()
 {
-	TileMatrix matrix;
+	TileMap map("map1.txt");
 
-	for (size_t i = 0; i < 5; ++i)
-	{
-		std::vector<Tile> vector(5, Tile(0x8000));
+	map.printMap();
 
-		matrix.push_back(vector);
-	}
-
-	for (size_t i = 0; i < 4; ++i)
-		matrix[i][2].setPassabilityBit(false);
-
-
-	TileMap map(matrix);
-
-	CellVector route = map.getShortestWay({ 0, 0 }, { 4, 4});
+	CellVector route = map.getShortestWay({ 0, 0 }, { 8, 15 });
 
 	printCells(route);
 }

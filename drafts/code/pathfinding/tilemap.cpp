@@ -1,4 +1,5 @@
 #include <algorithm>
+#include <iostream>
 #include <queue>
 #include <cmath>
 #include <map>
@@ -9,6 +10,43 @@
 
 TileMap::TileMap(const TileMatrix& map) :
 	_map(map) {}
+
+
+TileMap::TileMap(const std::string& filename)
+{
+	std::ifstream input(filename);
+
+	if (input.is_open())
+	{
+		while (!input.eof())
+		{
+			std::vector<Tile> tiles;
+			char ch;
+
+			input.get(ch);
+
+			while (ch != '\n' && !input.eof())
+			{
+				input.putback(ch);
+
+				Tile tile;
+				input >> std::hex >> tile;
+				
+				tiles.push_back(tile);
+
+				input.get(ch);
+			}
+
+			if (!tiles.empty())
+				_map.push_back(tiles);
+		}
+	}
+
+	else
+		std::cout << "Impossible to open " << filename << '\n';
+
+	input.close();
+}
 
 
 Shape TileMap::shape() const
@@ -86,6 +124,24 @@ CellVector TileMap::getShortestWay(Cell from, Cell to) const
 	std::reverse(route.begin(), route.end());
 
 	return route;
+}
+
+
+void TileMap::printMap() const
+{
+	for (size_t i = 0; i < _map.size(); ++i)
+	{
+		for (size_t j = 0; j < _map[i].size(); ++j)
+		{
+			if (_map[i][j].isPassible())
+				std::cout << "1";
+
+			else
+				std::cout << "0";
+		}
+
+		std::cout << std::endl;
+	}
 }
 
 

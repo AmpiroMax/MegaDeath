@@ -2,6 +2,8 @@
 #define TILE_MAP
 
 
+#include <fstream>
+#include <string>
 #include <vector>
 
 
@@ -26,12 +28,15 @@ class TileMap
 public:
 
 	explicit TileMap(const TileMatrix& map);
+	explicit TileMap(const std::string& filename);
 
 	TileMap(const TileMap&) = delete;
 	TileMap& operator= (const TileMap&) = delete;
 
 	CellVector getShortestWay(Cell from, Cell to) const;
 	Shape shape() const;
+
+	void printMap() const;
 
 private:
 
