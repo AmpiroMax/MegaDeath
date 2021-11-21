@@ -24,22 +24,14 @@ DEPENDPATH +=  $$PWD/SFML/include/
 SOURCES += \
     Game/game.cpp \
     Player/player.cpp \
-    Structures/tile.cpp \
-    WorldMap/worldmap.cpp \
     main.cpp
 
 
 HEADERS += \
     Game/game.h \
-    Interfaces/IDrawObj.h \
-    Interfaces/IObj.h \
-    Interfaces/IRender.h \
     Interfaces/IUnit.h \
     Player/player.h \
-    Structures/structs.h \
-    Structures/tile.h \
-    Structures/tile_constants.h \
-    WorldMap/worldmap.h
+    Structures/structs.h
 
 FORMS +=
 
@@ -48,3 +40,6 @@ FORMS +=
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+RESOURCES += \
+    media.qrc

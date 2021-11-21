@@ -1,29 +1,26 @@
 #ifndef IUNIT_H
 #define IUNIT_H
 
-#include "Interfaces/IDrawObj.h"
 #include "Structures/structs.h"
+#include <SFML/Graphics.hpp>
 
-class IUnit : public IDrawObj
+class IUnit : public sf::RectangleShape
 {
+  private:
+    GYM::stats characteristics;
+
+  protected:
+    sf::Texture *unitTexture;
+
   public:
-    GYM::pos coord;
-    GYM::stats stats;
-    GYM::inventory inventory;
+    GYM::fpos getCoordinate() { return {getPosition().x, getPosition().y}; }
+    GYM::stats getCharacteristics() { return characteristics; }
 
-    std::string name;
-    std::string info;
-    size_t id;
+    void setCoordinate(const GYM::fpos &_coord) { setPosition(_coord.x, _coord.y); }
+    void setCharacteristics(const GYM::stats &_characteristics) { characteristics = _characteristics; }
 
-    GYM::pos getCoordinate() { return coord; }
-    GYM::stats getStats() { return stats; }
-    GYM::inventory getInventory() { return inventory; }
-
-    void setCoordinate(const GYM::pos &_coord) { coord = _coord; }
-    void setStats(const GYM::stats &_stats) { stats = _stats; }
-    void setInventory(const GYM::inventory &_inventory) { inventory = _inventory; }
-
-    virtual void update() = 0;
+    virtual void drawUnit(sf::RenderTarget &target_window) const = 0;
+    virtual void updateUnit() = 0;
 };
 
 #endif // IUNIT_H

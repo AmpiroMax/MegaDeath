@@ -7,7 +7,10 @@
 namespace GYM
 {
 
-struct pos
+constexpr int playerSpriteWidth = 32;
+constexpr int playerSpriteHight = 64;
+
+struct fpos
 {
     float x;
     float y;
