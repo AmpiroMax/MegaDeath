@@ -25,6 +25,8 @@ SOURCES += \
     Game/game.cpp \
     Game/gamewidget.cpp \
     Player/player.cpp \
+    WorldMap/tile/tile.cpp \
+    WorldMap/tilemap.cpp \
     main.cpp
 
 
@@ -33,7 +35,11 @@ HEADERS += \
     Game/gamewidget.h \
     Interfaces/IUnit.h \
     Player/player.h \
-    Structures/structs.h
+    Structures/structs.h \
+    WorldMap/tile/tile.h \
+    WorldMap/tile/tile_constants.h \
+    WorldMap/tilemap.h \
+    WorldMap/tilemap_constants.h
 
 FORMS +=
 
