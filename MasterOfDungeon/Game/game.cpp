@@ -1,6 +1,5 @@
 #include "game.h"
 
-Game::Game()
+Game::Game(int argc, char *argv[]) : application(argc, argv)
 {
-
 }

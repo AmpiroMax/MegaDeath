@@ -1,20 +1,18 @@
 #ifndef GAME_H
 #define GAME_H
 
-#include "Interfaces/IUnit.h"
-#include "WorldMap/worldmap.h"
+#include "gamewidget.h"
+#include <QApplication>
+#include <QWidget>
 
 class Game
 {
   private:
-    static int gamesCount; // Game - singleton объект, поэтому
-                           // добавлено статическое поле
-    WorldMap *gameMap;     // Указатель на игровую карту
+    QApplication application;
+    GameWidget gameWidget;
 
   public:
-    Game();
-
-    void gameLoop();
+    Game(int argc, char *argv[]);
 };
 
 #endif // GAME_H

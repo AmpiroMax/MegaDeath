@@ -23,12 +23,14 @@ DEPENDPATH +=  $$PWD/SFML/include/
 
 SOURCES += \
     Game/game.cpp \
+    Game/gamewidget.cpp \
     Player/player.cpp \
     main.cpp
 
 
 HEADERS += \
     Game/game.h \
+    Game/gamewidget.h \
     Interfaces/IUnit.h \
     Player/player.h \
     Structures/structs.h
