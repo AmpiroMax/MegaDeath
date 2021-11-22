@@ -33,6 +33,7 @@ QPaintEngine *GameWidget::paintEngine() const
 
 void GameWidget::paintEvent(QPaintEvent *)
 {
+    worldMap->printMap();
 }
 
 void GameWidget::showEvent(QShowEvent *)

@@ -18,6 +18,8 @@ class Game
 
   public:
     Game(int argc, char *argv[]);
+
+    void gameLoop();
 };
 
 #endif // GAME_H

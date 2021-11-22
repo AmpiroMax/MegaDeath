@@ -1,10 +1,8 @@
-#include <QApplication>
-#include <QWidget>
+#include "Game/game.h"
 
 int main(int argc, char *argv[])
 {
-    QApplication a(argc, argv);
-    QWidget w;
-    w.show();
-    return a.exec();
+    Game game(argc, argv);
+    game.gameLoop();
+    return 0;
 }
