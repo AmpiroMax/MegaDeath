@@ -10,6 +10,8 @@ class Player : public IUnit
     Player();
 
     virtual void drawUnit(sf::RenderTarget &target_window) const override;
+    virtual void updateUnit() override;
+    virtual void moveUnit() override;
 };
 
 #endif // PLAYER_H

@@ -2,12 +2,15 @@
 #define IUNIT_H
 
 #include "Structures/structs.h"
+#include "WorldMap/tilemap_constants.h"
+
 #include <SFML/Graphics.hpp>
 
 class IUnit : public sf::RectangleShape
 {
   private:
     GYM::stats characteristics;
+    CellVector path;
 
   protected:
     sf::Texture *unitTexture;
@@ -21,6 +24,7 @@ class IUnit : public sf::RectangleShape
 
     virtual void drawUnit(sf::RenderTarget &target_window) const = 0;
     virtual void updateUnit() = 0;
+    virtual void moveUnit() = 0;
 };
 
 #endif // IUNIT_H
