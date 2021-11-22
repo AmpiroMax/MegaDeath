@@ -1,8 +1,11 @@
 #ifndef GAMEWIDGET_H
 #define GAMEWIDGET_H
 
+#include "WorldMap/tilemap.h"
+
 #include "SFML/Graphics.hpp"
 #include "SFML/Graphics/RenderWindow.hpp"
+
 #include <QEvent>
 #include <QMouseEvent>
 #include <QTimer>
@@ -12,6 +15,8 @@ class GameWidget : public QWidget, public sf::RenderWindow
 {
     Q_OBJECT
   private:
+    TileMap *worldMap;
+
     sf::Color clearColor;
     sf::View view;
 
