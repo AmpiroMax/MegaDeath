@@ -10,7 +10,7 @@ Player::Player()
     // Довольно интересный момент в том плане, что
     // SFML не может загрузить изображение из ресурсов, как это делают QPixmap или QImage
 
-    QPixmap pixmap(":/Units/media/unitsTexture/player/demo1.png"); // Но если создать объект QPixmap
+    QPixmap pixmap(":/media/unitsTexture/player/demo1.png"); // Но если создать объект QPixmap
 
     QByteArray bArray;       // Создать объект массива байтов
     QBuffer buffer(&bArray); // Поместить его в буфер

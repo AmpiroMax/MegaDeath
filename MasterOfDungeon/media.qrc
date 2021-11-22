@@ -1,6 +1,20 @@
 <RCC>
-    <qresource prefix="/"/>
-    <qresource prefix="/Units">
+    <qresource prefix="/">
+        <file>maps/hut.txt</file>
+        <file>maps/map1.txt</file>
+        <file>maps/massive_stone.txt</file>
+        <file>maps/stone.txt</file>
+        <file>maps/tample.txt</file>
+        <file>media/gloabalMap/map_1.txt</file>
+        <file>media/gloabalMap/map_1_info.txt</file>
+        <file>media/gloabalMap/readme.txt</file>
+        <file>media/textures/cartoon like.jpg</file>
+        <file>media/textures/diff bioms nature.png</file>
+        <file>media/textures/diff higths example.png</file>
+        <file>media/textures/good isometric example.png</file>
+        <file>media/textures/isometric smooth and beautiful .jpg</file>
+        <file>media/textures/map and tilefile .png</file>
+        <file>media/textures/screnshot from game maker .png</file>
         <file>media/unitsTextures/player/demo1.png</file>
     </qresource>
 </RCC>
