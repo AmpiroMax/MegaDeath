@@ -7,6 +7,8 @@
 namespace GYM
 {
 
+constexpr int tileSize = 32;
+
 constexpr int playerSpriteWidth = 32;
 constexpr int playerSpriteHight = 64;
 

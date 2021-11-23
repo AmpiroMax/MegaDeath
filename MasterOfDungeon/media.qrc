@@ -16,5 +16,6 @@
         <file>media/textures/map and tilefile .png</file>
         <file>media/textures/screnshot from game maker .png</file>
         <file>media/unitsTextures/player/demo1.png</file>
+        <file>media/textures/maptexture.png</file>
     </qresource>
 </RCC>
