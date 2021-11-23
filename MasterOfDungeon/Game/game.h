@@ -14,12 +14,12 @@ class Game
     QApplication application;
     GameWidget gameWidget;
     TileMap worldMap;
-    Player player;
+    // Player player;
 
   public:
     Game(int argc, char *argv[]);
 
-    void gameLoop();
+    int gameLoop();
 };
 
 #endif // GAME_H

@@ -21,6 +21,11 @@ GameWidget::GameWidget(QWidget *parent)
     clearColor = sf::Color(0, 0, 0);
 }
 
+void GameWidget::setWorldMap(const TileMap *map)
+{
+    worldMap = map;
+}
+
 QPaintEngine *GameWidget::paintEngine() const
 {
     // В силу того, что мы рисуем в окне через SFML, были установлены
@@ -68,5 +73,6 @@ void GameWidget::resizeEvent(QResizeEvent *)
 
 void GameWidget::onTimeout()
 {
+    printf("Timeout reached \n");
     repaint();
 }

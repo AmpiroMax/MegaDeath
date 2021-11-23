@@ -2,8 +2,12 @@
 
 Game::Game(int argc, char *argv[]) : application(argc, argv), worldMap(":/maps/hut.txt")
 {
+    gameWidget.setWorldMap(&worldMap);
+    gameWidget.show();
 }
 
-void Game::gameLoop()
+int Game::gameLoop()
 {
+
+    return application.exec();
 }

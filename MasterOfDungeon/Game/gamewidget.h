@@ -15,7 +15,7 @@ class GameWidget : public QWidget, public sf::RenderWindow
 {
     Q_OBJECT
   private:
-    TileMap *worldMap;
+    const TileMap *worldMap;
 
     sf::Color clearColor;
     sf::View view;
@@ -26,6 +26,8 @@ class GameWidget : public QWidget, public sf::RenderWindow
 
   public:
     explicit GameWidget(QWidget *parent = nullptr);
+
+    void setWorldMap(const TileMap *map);
 
   private:
     virtual QPaintEngine *paintEngine() const override;
