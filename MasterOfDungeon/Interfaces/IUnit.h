@@ -13,7 +13,7 @@ class IUnit : public sf::RectangleShape
     CellVector path;
 
   protected:
-    sf::Texture *unitTexture;
+    sf::Texture unitTexture;
 
   public:
     GYM::fpos getCoordinate() { return {getPosition().x, getPosition().y}; }
@@ -22,9 +22,9 @@ class IUnit : public sf::RectangleShape
     void setCoordinate(const GYM::fpos &_coord) { setPosition(_coord.x, _coord.y); }
     void setCharacteristics(const GYM::stats &_characteristics) { characteristics = _characteristics; }
 
-    virtual void drawUnit(sf::RenderTarget &target_window) const = 0;
-    virtual void updateUnit() = 0;
-    virtual void moveUnit() = 0;
+    // virtual void drawUnit(sf::RenderTarget &target_window) const;
+    // virtual void updateUnit();
+    // virtual void moveUnit();
 };
 
 #endif // IUNIT_H

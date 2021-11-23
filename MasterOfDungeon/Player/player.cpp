@@ -10,17 +10,19 @@ Player::Player()
     // Довольно интересный момент в том плане, что
     // SFML не может загрузить изображение из ресурсов, как это делают QPixmap или QImage
 
-    QPixmap pixmap(":/media/unitsTexture/player/demo1.png"); // Но если создать объект QPixmap
+    QPixmap pixmap(":/media/unitsTextures/player/demo1.png"); // Но если создать объект QPixmap
 
     QByteArray bArray;       // Создать объект массива байтов
     QBuffer buffer(&bArray); // Поместить его в буфер
+
     buffer.open(QIODevice::WriteOnly); // Сохранить изображение в этот буфер, то есть в память
+
     pixmap.save(&buffer, "PNG");
 
     // Загружаю текстуру в своего юнита
-    unitTexture->loadFromMemory(buffer.data().data(), buffer.data().size());
+    unitTexture.loadFromMemory(buffer.data().data(), buffer.data().size());
     // Устанавливаю текстуру у Shape
-    setTexture(unitTexture);
+    setTexture(&unitTexture);
     // Устанавливаю начальное положение отрисовываемой части текстуры
     sf::IntRect rect(0, 0, GYM::playerSpriteWidth, GYM::playerSpriteHight);
     setTextureRect(rect);
@@ -36,10 +38,12 @@ void Player::drawUnit(sf::RenderTarget &target_window) const
     target_window.draw(*this);
 }
 
-void Player::updateUnit()
-{
-}
+// void Player::updateUnit()
+//{
+//    printf("Updating unit");
+//}
 
-void Player::moveUnit()
-{
-}
+// void Player::moveUnit()
+//{
+//    printf("Moving unit");
+//}
