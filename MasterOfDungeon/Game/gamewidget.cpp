@@ -18,12 +18,38 @@ GameWidget::GameWidget(QWidget *parent)
 
     isInited = false;
     timer.setInterval(20);
-    clearColor = sf::Color(0, 0, 0);
+    clearColor = sf::Color(100, 0, 0);
 }
 
-void GameWidget::setWorldMap(const TileMap *map)
+void GameWidget::initMapPlayer(const TileMap *map, const Player *_player)
 {
     worldMap = map;
+    player = _player;
+
+    QPixmap pixmap(":/media/textures/maptexture.png");
+    QByteArray bArray;
+    QBuffer buffer(&bArray);
+    buffer.open(QIODevice::WriteOnly);
+    pixmap.save(&buffer, "PNG");
+    mapTexture.loadFromMemory(buffer.data().data(), buffer.data().size());
+    canvasSprite.setTexture(mapTexture);
+}
+
+void GameWidget::drawMap()
+{
+    TileMatrix mapMatrix;
+
+    for (size_t i = 0; i < mapMatrix.size(); i++)
+        for (size_t j = 0; j < mapMatrix[0].size(); j++)
+        {
+            if (mapMatrix[i][j].isPassible())
+                canvasSprite.setTextureRect(sf::IntRect(0, 0, GYM::tileSize, GYM::tileSize));
+            else
+                canvasSprite.setTextureRect(sf::IntRect(GYM::tileSize, 0, GYM::tileSize, GYM::tileSize));
+
+            canvasSprite.setPosition(j * GYM::tileSize, i * GYM::tileSize);
+            draw(canvasSprite);
+        }
 }
 
 QPaintEngine *GameWidget::paintEngine() const
@@ -38,7 +64,14 @@ QPaintEngine *GameWidget::paintEngine() const
 
 void GameWidget::paintEvent(QPaintEvent *)
 {
-    worldMap->printMap();
+    if (!isInited)
+        return;
+
+    clear(clearColor);
+    setView(view);
+    // drawMap();
+    draw(*player);
+    display();
 }
 
 void GameWidget::showEvent(QShowEvent *)
@@ -52,6 +85,10 @@ void GameWidget::showEvent(QShowEvent *)
     // уже созданым QWidget, в котором и будет происходить отрисовка
     RenderWindow::create(sf::WindowHandle(winId()));
 
+    // Изначальные настройки положения камеры
+    view.setCenter(size().width() / 2, size().height() / 2);
+    view.setSize(size().width(), size().height());
+
     // Соединяю сигнал таймера со слотом этого виджета.
     // Запускаю таймер
     connect(&timer, &QTimer::timeout, this, &GameWidget::onTimeout);
@@ -64,15 +101,12 @@ void GameWidget::resizeEvent(QResizeEvent *)
 {
     // В случае изменения размера виджета, необходимо поменять
     // размер и SFML RenderWindow окну, для правильного отображения
-    // Также после смены размера, необходимо поставить центр обзора (view)
-    // на новое положение
     setSize(sf::Vector2u(size().width(), size().height()));
+    // обновляю размеры камеры, для корректного отображения масштаба
     view.setSize(size().width(), size().height());
-    repaint();
 }
 
 void GameWidget::onTimeout()
 {
-    printf("Timeout reached \n");
-    repaint();
+    // repaint();
 }

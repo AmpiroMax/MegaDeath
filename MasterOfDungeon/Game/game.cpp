@@ -1,13 +1,25 @@
 #include "game.h"
 
-Game::Game(int argc, char *argv[]) : application(argc, argv), worldMap(":/maps/hut.txt")
+#include <QThread>
+
+Game::Game(int argc, char *argv[]) : application(argc, argv)
 {
-    gameWidget.setWorldMap(&worldMap);
-    gameWidget.show();
+    player = new Player();
+    worldMap = new TileMap(":/maps/massive_stone.txt");
+    gameWidget = new GameWidget;
+
+    application.setActiveWindow(gameWidget);
+    gameWidget->initMapPlayer(worldMap, player);
+
+    initGame();
 }
 
-int Game::gameLoop()
+void Game::initGame()
 {
+    gameWidget->show();
+}
 
+int Game::execGame()
+{
     return application.exec();
 }
