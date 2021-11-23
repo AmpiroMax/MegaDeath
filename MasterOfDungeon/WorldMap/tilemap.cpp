@@ -4,6 +4,9 @@
 #include <map>
 #include <queue>
 
+#include <QFile>
+#include <QString>
+
 //
 
 #include "tilemap.h"
@@ -14,36 +17,32 @@ TileMap::TileMap(const TileMatrix &map) : _map(map)
 
 TileMap::TileMap(const std::string &filename)
 {
-    std::ifstream input(filename);
+    QFile input(QString::fromStdString(filename));
 
-    if (input.is_open())
+    if (!input.open(QIODevice::ReadOnly))
     {
-        while (!input.eof())
-        {
-            std::vector<Tile> tiles;
-            char ch;
-
-            input.get(ch);
-
-            while (ch != '\n' && !input.eof())
-            {
-                input.putback(ch);
-
-                Tile tile;
-                input >> std::hex >> tile;
-
-                tiles.push_back(tile);
-
-                input.get(ch);
-            }
-
-            if (!tiles.empty())
-                _map.push_back(tiles);
-        }
+        std::cout << "Impossible to open " << filename << '\n';
+        return;
     }
 
-    else
-        std::cout << "Impossible to open " << filename << '\n';
+    while (!input.atEnd())
+    {
+        std::vector<Tile> tiles;
+        uint16_t tileNumber;
+
+        QString line = input.readLine();
+        QStringList fields = line.split(" ");
+
+        for (auto field : fields)
+        {
+            bool ok;
+            tileNumber = field.toUShort(&ok, 16);
+            Tile Tile(tileNumber);
+
+            tiles.push_back(Tile);
+        }
+        _map.push_back(tiles);
+    }
 
     input.close();
 }
