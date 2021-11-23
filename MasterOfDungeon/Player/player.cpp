@@ -35,3 +35,11 @@ void Player::drawUnit(sf::RenderTarget &target_window) const
 {
     target_window.draw(*this);
 }
+
+void Player::updateUnit()
+{
+}
+
+void Player::moveUnit()
+{
+}
