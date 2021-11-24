@@ -37,7 +37,7 @@ void GameWidget::initMapPlayer(const TileMap *map, const Player *_player)
 
 void GameWidget::drawMap()
 {
-    TileMatrix mapMatrix;
+    TileMatrix mapMatrix = worldMap->getCentredLocalMap({4, 3}, 5, 5);
 
     for (size_t i = 0; i < mapMatrix.size(); i++)
         for (size_t j = 0; j < mapMatrix[0].size(); j++)
@@ -70,7 +70,7 @@ void GameWidget::paintEvent(QPaintEvent *)
     clear(clearColor);
     view.setCenter(player->getPosition());
     setView(view);
-    // drawMap();
+    drawMap();
     draw(*player);
     display();
 }
