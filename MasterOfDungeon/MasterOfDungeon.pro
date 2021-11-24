@@ -24,6 +24,7 @@ DEPENDPATH +=  $$PWD/SFML/include/
 SOURCES += \
     Game/game.cpp \
     Game/gamewidget.cpp \
+    Interfaces/IUnit.cpp \
     Player/player.cpp \
     WorldMap/tile/tile.cpp \
     WorldMap/tilemap.cpp \
@@ -51,3 +52,4 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 RESOURCES += \
     media.qrc
+

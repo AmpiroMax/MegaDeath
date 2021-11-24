@@ -1,9 +1,8 @@
 #include <algorithm>
-#include <iostream>
-#include <queue>
 #include <cmath>
+#include <iostream>
 #include <map>
-
+#include <queue>
 
 #include <QFile>
 #include <QString>
@@ -163,8 +162,7 @@ void TileMap::printMap() const
     }
 }
 
-TileMatrix TileMap::getLocalMap(Cell coord, int topLen, int bttmLen,
-                                int leftLen, int rightLen) const
+TileMatrix TileMap::getLocalMap(Cell coord, int topLen, int bttmLen, int leftLen, int rightLen) const
 /*
 
   Эта функция возвращает локальну карту следующего размера:
@@ -184,7 +182,7 @@ TileMatrix TileMap::getLocalMap(Cell coord, int topLen, int bttmLen,
     TileMatrix localMap;
     Shape shp = shape();
 
-    if(_isCoordCorrect(coord, shp, {0, 0}))
+    if (_isCoordCorrect(coord, shp, {0, 0}))
     {
         int vertMax = std::min(coord.first + topLen, shp.first);
         int vertMin = std::max(coord.first - bttmLen, 0);
@@ -220,7 +218,7 @@ TileMatrix TileMap::getCentredLocalMap(Cell centre, int vertLen, int horLen) con
 
 */
 {
-    return getLocalMap(centre, vertLen, vertLen, horLen, horLen);
+    return getLocalMap(centre, vertLen + 1, vertLen, horLen, horLen + 1);
 }
 
 CellVector TileMap::_getAdjacentCells(int x, int y) const

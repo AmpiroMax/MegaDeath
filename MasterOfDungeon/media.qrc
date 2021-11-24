@@ -17,5 +17,6 @@
         <file>media/textures/screnshot from game maker .png</file>
         <file>media/unitsTextures/player/demo1.png</file>
         <file>media/textures/maptexture.png</file>
+        <file>maps/massive_map.txt</file>
     </qresource>
 </RCC>

@@ -32,18 +32,3 @@ Player::Player()
 
     setOrigin(GYM::playerSpriteWidth / 2, GYM::playerSpriteHight / 2);
 }
-
-void Player::drawUnit(sf::RenderTarget &target_window) const
-{
-    target_window.draw(*this);
-}
-
-// void Player::updateUnit()
-//{
-//    printf("Updating unit");
-//}
-
-// void Player::moveUnit()
-//{
-//    printf("Moving unit");
-//}

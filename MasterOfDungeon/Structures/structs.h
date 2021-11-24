@@ -16,12 +16,36 @@ struct fpos
 {
     float x;
     float y;
+
+    fpos()
+    {
+        x = 0;
+        y = 0;
+    }
+
+    fpos(float _x, float _y)
+    {
+        x = _x;
+        y = _y;
+    }
 };
 
 struct ipos
 {
     int x;
     int y;
+
+    ipos()
+    {
+        x = 0;
+        y = 0;
+    }
+
+    ipos(int _x, int _y)
+    {
+        x = _x;
+        y = _y;
+    }
 };
 
 struct uipos

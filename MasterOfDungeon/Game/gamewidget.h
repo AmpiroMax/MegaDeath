@@ -17,6 +17,7 @@
 #include <QTimer>
 #include <QWidget>
 
+#include <algorithm>
 #include <vector>
 
 class GameWidget : public QWidget, public sf::RenderWindow
@@ -24,7 +25,7 @@ class GameWidget : public QWidget, public sf::RenderWindow
     Q_OBJECT
   private:
     const TileMap *worldMap;
-    const Player *player;
+    Player *player;
 
     sf::Color clearColor;
     sf::View view;
@@ -38,7 +39,7 @@ class GameWidget : public QWidget, public sf::RenderWindow
   public:
     explicit GameWidget(QWidget *parent = nullptr);
 
-    void initMapPlayer(const TileMap *, const Player *);
+    void initMapPlayer(const TileMap *, Player *);
     void drawMap();
 
   private:
@@ -46,6 +47,11 @@ class GameWidget : public QWidget, public sf::RenderWindow
     virtual void paintEvent(QPaintEvent *) override;
     virtual void showEvent(QShowEvent *) override;
     virtual void resizeEvent(QResizeEvent *) override;
+
+    virtual void mousePressEvent(QMouseEvent *) override;
+
+    void calculatePath(GYM::fpos);
+    void movePlayer(GYM::ipos);
 
   private slots:
     void onTimeout();
