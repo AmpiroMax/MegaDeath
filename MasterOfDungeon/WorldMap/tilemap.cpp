@@ -1,8 +1,9 @@
 #include <algorithm>
-#include <cmath>
 #include <iostream>
-#include <map>
 #include <queue>
+#include <cmath>
+#include <map>
+
 
 #include <QFile>
 #include <QString>
@@ -16,6 +17,15 @@ TileMap::TileMap(const TileMatrix &map) : _map(map)
 }
 
 TileMap::TileMap(const std::string &filename)
+/*
+
+  Конструктор для создания карты по txt-файлу
+
+  :param: const std::string& filename - имя файла для чтения
+
+  :return: ничего не возвращаяет
+
+*/
 {
     QFile input(QString::fromStdString(filename));
 
@@ -125,6 +135,18 @@ CellVector TileMap::getShortestWay(Cell from, Cell to) const
 }
 
 void TileMap::printMap() const
+/*
+
+  Функция для отладки (удалить по заверщении проекта)
+  Печатает карту по следующему принципу:
+  - Если поле проходимо - печатает "1";
+  - Если поле непроходимо - печатает "0"
+
+  :param: нет параметров
+
+  :return: ничего не возвращает
+
+ */
 {
     for (size_t i = 0; i < _map.size(); ++i)
     {
@@ -139,6 +161,66 @@ void TileMap::printMap() const
 
         std::cout << std::endl;
     }
+}
+
+TileMatrix TileMap::getLocalMap(Cell coord, int topLen, int bttmLen,
+                                int leftLen, int rightLen) const
+/*
+
+  Эта функция возвращает локальну карту следующего размера:
+  [coord.i - bttmLen; coord.i + topLen - 1] x
+  [coord.j - leftLen; coord.j + rightLen - 1]
+
+  :param: Cell coord - базовая точка, от которой отсчитываются смещения
+  :param: int topLen - смещение вверх по i
+  :param: int bttmLen - смещение вниз по i
+  :param: int leftLen - смещение влево по j
+  :param: int rightLen - смещение вправо по j
+
+  :return: TileMatrix - локальная карта
+
+*/
+{
+    TileMatrix localMap;
+    Shape shp = shape();
+
+    if(_isCoordCorrect(coord, shp, {0, 0}))
+    {
+        int vertMax = std::min(coord.first + topLen, shp.first);
+        int vertMin = std::max(coord.first - bttmLen, 0);
+        int horMin = std::max(coord.second - leftLen, 0);
+        int horMax = std::min(coord.second + rightLen, shp.second);
+
+        for (int i = vertMin; i < vertMax; ++i)
+        {
+            std::vector<Tile> line;
+
+            for (int j = horMin; j < horMax; ++j)
+                line.push_back(_map[i][j]);
+
+            localMap.push_back(line);
+        }
+    }
+
+    return localMap;
+}
+
+TileMatrix TileMap::getCentredLocalMap(Cell centre, int vertLen, int horLen) const
+/*
+
+  Эта функция возвращает локальну карту следующего размера:
+  [centre.i - vertLen; centre.i + vertLen - 1] x
+  [centre.j - horLen; centre.j + horLen - 1]
+
+  :param: Cell centre - базовая точка, от которой отсчитываются смещения
+  :param: int vertLen - смещение по i
+  :param: int horLen - смещение  по j
+
+  :return: TileMatrix - локальная карта с центром в centre
+
+*/
+{
+    return getLocalMap(centre, vertLen, vertLen, horLen, horLen);
 }
 
 CellVector TileMap::_getAdjacentCells(int x, int y) const
@@ -179,10 +261,43 @@ CellVector TileMap::_getAdjacentCells(int x, int y) const
 }
 
 double TileMap::_calculateHeuristic(Cell from, Cell to) const
+/*
+
+  Эта функция считается эвристику для алгоритма А*
+
+  Эвристика - расстояние на плоскости
+
+  :param: Cell from, to - координаты концов отрезков
+
+  :return: расстояние между концами отрезков
+
+*/
 {
     int x = to.first - from.first;
     int y = to.second - from.second;
     double dist = sqrt(pow(x, 2) + pow(y, 2));
 
     return dist;
+}
+
+bool TileMap::_isCoordCorrect(Cell coord, Cell topLim, Cell bttmLim) const
+/*
+
+  Эта функция проверяет принадлежит ли заданная координата указанной области
+
+  :param: Cell coord - проверяемая координата
+  :param: Cell topLim - границы сверху по x и y
+  :param: Cell bttmLim - границы снизу по x и y
+
+  :return: true, если точка не выходит за границы, иначе - false
+
+*/
+{
+    if ((coord.first < bttmLim.first) || (coord.first >= topLim.first))
+        return false;
+
+    if ((coord.second < bttmLim.second) || (coord.second >= topLim.second))
+        return false;
+
+    return true;
 }

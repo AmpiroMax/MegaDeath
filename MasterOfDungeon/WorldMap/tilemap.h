@@ -31,6 +31,9 @@ class TileMap
     TileMap &operator=(const TileMap &) = delete;
 
     CellVector getShortestWay(Cell from, Cell to) const;
+    TileMatrix getLocalMap(Cell coord, int topLen, int bttmLen, int leftLen,
+                           int rightLen) const;
+    TileMatrix getCentredLocalMap(Cell centre, int vertLen, int horLen) const;
     Shape shape() const;
 
     void printMap() const;
@@ -38,6 +41,7 @@ class TileMap
   private:
     CellVector _getAdjacentCells(int x, int y) const;
     double _calculateHeuristic(Cell from, Cell to) const;
+    bool _isCoordCorrect(Cell coord, Cell topLim, Cell bttmLim) const;
 
     TileMatrix _map;
 };
