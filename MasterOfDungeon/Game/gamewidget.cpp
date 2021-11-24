@@ -68,6 +68,7 @@ void GameWidget::paintEvent(QPaintEvent *)
         return;
 
     clear(clearColor);
+    view.setCenter(player->getPosition());
     setView(view);
     // drawMap();
     draw(*player);
@@ -86,7 +87,7 @@ void GameWidget::showEvent(QShowEvent *)
     RenderWindow::create(sf::WindowHandle(winId()));
 
     // Изначальные настройки положения камеры
-    view.setCenter(size().width() / 2, size().height() / 2);
+    view.setCenter(player->getPosition());
     view.setSize(size().width(), size().height());
 
     // Соединяю сигнал таймера со слотом этого виджета.
