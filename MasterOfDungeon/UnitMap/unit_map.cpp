@@ -35,6 +35,13 @@ Point2D<int> UnitMap::shape() const
 
 
 void UnitMap::addUnit(IUnit *unit)
+/*
+ Эта функция добавляет переданного юнита в чанк, в котором он находится
+
+ :param: IUnit* unit - указатель на юнита
+
+ :return: ничего не возвращает
+ */
 {
     if (unit)
     {
@@ -49,6 +56,13 @@ void UnitMap::addUnit(IUnit *unit)
 
 
 void UnitMap::deleteUnit(IUnit *unit)
+/*
+ Эта функция удаляет переданного юнита из чанка, в котором он находится
+
+ :param: IUnit* unit - указатель на юнита
+
+ :return: ничего не возвращает
+*/
 {
     if (unit)
     {
@@ -68,6 +82,16 @@ void UnitMap::deleteUnit(IUnit *unit)
 
 
 void UnitMap::moveUnit(Point2D<int> from, IUnit* unit)
+/*
+
+  Эта функция перемещает данного юнита из заданного чанка в
+  чанк, в котором находится юнит
+
+  :param: Point2D<int> from - заданный чанк
+  :param: IUnit* unit - заданный юнит
+
+  :return: ничего не возвращает
+*/
 {
     if (!unit) return;
 
@@ -88,6 +112,13 @@ void UnitMap::moveUnit(Point2D<int> from, IUnit* unit)
 
 
 UnitChunk UnitMap::getLocalUnitMap(Point2D<int> chunkPos) const
+/*
+ Эта функция возвращает словарь со всеми юнитами в данном чанке
+
+ :param: Point2D<int> chunkPos - координаты данного чанка
+
+ :return: UnitChunk - словарь юнитов данного чанка
+*/
 {
     UnitChunk localMap;
     Point2D<int> shp = shape();
@@ -101,6 +132,13 @@ UnitChunk UnitMap::getLocalUnitMap(Point2D<int> chunkPos) const
 
 
 bool UnitMap::isAnybodyThere(Point2D<int> tilePos) const
+/*
+  Эта функция определяет, есть ли юниты в данном тайле
+
+  :param: Point2D<int> tilePos - позиция данного тайла
+
+  :return: true - если в тайле есть юнит, иначе - false
+*/
 {
     Point2D<int> pxlPos = convertTilePosToPixelPos(tilePos);
     Point2D<int> pos = convertPixelPosToChunkPos(pxlPos);

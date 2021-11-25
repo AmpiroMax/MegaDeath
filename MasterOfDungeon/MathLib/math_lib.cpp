@@ -48,6 +48,15 @@ Point2D<int> getUnitPixelPos(IUnit* unit)
 
 
 Point2D<int> getUnitChunkPos(IUnit* unit)
+/*
+ Эта функция расчитывает позицию юнита в чанках
+
+ :param: IUnit* unit - указатель на юнита
+
+ :return: Point2D<int> - позиция в чанках
+
+ Замечание: в случае, если передан nullptr возвращает недействительные индексы
+*/
 {
     Point2D<int> pos;
 
@@ -62,6 +71,15 @@ Point2D<int> getUnitChunkPos(IUnit* unit)
 
 
 Point2D<int> getUnitTilePos(IUnit* unit)
+/*
+ Эта функция расчитывает позицию юнита в тайлах
+
+ :param: IUnit* unit - указатель на юнита
+
+ :return: Point2D<int> - позиция в тайлах
+
+ Замечание: в случае, если передан nullptr возвращает недействительные индексы
+*/
 {
     Point2D<int> pos;
 
@@ -102,11 +120,25 @@ Point2D<int> convertPixelPosToTilePos(Point2D<int> pos)
 
 
 Point2D<int> convertChunkPosToPixelPos(Point2D<int> pos)
+/*
+  Эта функция переводит координаты текущей позиции из чанков в пиксели
+
+  :param: Point2D<int> pos - текущая позиция в чанках
+
+  :return: Point2D<int> - позиция в пикселях
+*/
 {
     return convertNonPixelPosToPixel(pos, chunkSize);
 }
 
 Point2D<int> convertTilePosToPixelPos(Point2D<int> pos)
+/*
+  Эта функция переводит координаты текущей позиции из тайлов в пиксели
+
+  :param: Point2D<int> pos - текущая позиция в тайлах
+
+  :return: Point2D<int> - позиция в пикселях
+*/
 {
     return convertNonPixelPosToPixel(pos, tileSize);
 }
@@ -131,6 +163,14 @@ Point2D<int> convertPixelPosToNonPixel(Point2D<int> pos, int segmentation)
 
 
 Point2D<int> convertNonPixelPosToPixel(Point2D<int> pos, int segmentation)
+/*
+ Эта функция переводит координаты из данных единиц измерения в пиксели
+
+ :param: Point2D<int> pos - позиция в данных единицах измерения
+ :param: int segmentation - количество пикселей в данной единице измерения
+
+ :return: Point2D<int> - позиция в пикселях
+*/
 {
     Point2D convPos(pos.x * segmentation, pos.y * segmentation);
 
