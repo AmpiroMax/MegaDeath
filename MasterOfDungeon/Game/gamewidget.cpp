@@ -111,7 +111,8 @@ void GameWidget::mousePressEvent(QMouseEvent *event)
 {
     GYM::ipos pos(event->pos().x(), event->pos().y());
 
-    movePlayer(pos);
+    if (event->button() == Qt::MouseButton::RightButton)
+        movePlayer(pos);
 }
 
 #include <iostream>

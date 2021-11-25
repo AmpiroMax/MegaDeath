@@ -19,8 +19,68 @@ GYM::fpos IUnit::getUnitVector(GYM::fpos beg, GYM::fpos end)
     return GYM::fpos(dx / len, dy / len);
 }
 
+// переменная j отвечает за направление движения Unit
+// в зависимости отт неё выбирается один из 4 видов тайлов движения
+void IUnit::changeTextureRect(int j)
+{
+    textureId.x = currentTextureTick / 5;
+    textureId.y = j;
+
+    // std::cout << textureId.y << std::endl;
+
+    int xLeftTop = textureId.x * GYM::playerSpriteWidth;
+    int yLefTtop = textureId.y * GYM::playerSpriteHight;
+
+    sf::IntRect rect(xLeftTop, yLefTtop, GYM::playerSpriteWidth, GYM::playerSpriteHight);
+    setTextureRect(rect);
+}
+
+int IUnit::getMovementId(float dx, float dy)
+{
+    // проверка на случай неправильных данных
+    if (dx == 0 && dy == 0)
+        return 0;
+
+    // движение вверх
+    if (dx == 0 && dy < 0)
+        return 3;
+
+    // движение вниз
+    if (dx == 0 && dy > 0)
+        return 0;
+
+    // движение направо
+    if (dy == 0 && dx > 0)
+        return 1;
+
+    // движение налево
+    if (dy == 0 && dx < 0)
+        return 2;
+
+    // движение направо
+    if (dx > 0 && abs(dy / dx) < 1)
+        return 1;
+
+    // движение налево
+    if (dx < 0 && abs(dy / dx) < 1)
+        return 2;
+
+    // движение вверх
+    if (dy < 0 && abs(dy / dx) > 1)
+        return 3;
+
+    // движение вниз
+    if (dy > 0 && abs(dy / dx) > 1)
+        return 0;
+
+    return 0;
+}
+
 IUnit::IUnit()
 {
+    textureId = GYM::ipos(0, 0);
+    textureTick = 20;
+    currentTextureTick = 0;
 }
 
 GYM::stats IUnit::getCharacteristics()
@@ -69,14 +129,23 @@ void IUnit::moveUnit()
     float dx = velocity.x * unitVector.x;
     float dy = velocity.y * unitVector.y;
 
-    //    std::cout << "dx, dy      " << dx << ", " << dy << std::endl;
+    // std::cout << "dx, dy      " << dx << ", " << dy << std::endl;
     //    std::cout << "myPos       " << myPos.x << ", " << myPos.y << std::endl;
     //    std::cout << "nextCellPos " << nextCellPos.x << ", " << nextCellPos.y << std::endl;
 
     if (!isAinAreaOfB(myPos, nextCellPos))
     {
+        int j = getMovementId(dx, dy);
+        changeTextureRect(j);
+        if (currentTextureTick == textureTick)
+        {
+            currentTextureTick = 0;
+        }
+        currentTextureTick += 1;
+
         move(dx, dy);
         return;
     }
     path.pop_back();
+    currentTextureTick = 0;
 }

@@ -16,9 +16,14 @@ class IUnit : public sf::RectangleShape
 
     bool isAinAreaOfB(GYM::fpos A, GYM::fpos B);
     GYM::fpos getUnitVector(GYM::fpos A, GYM::fpos B);
+    void changeTextureRect(int movementDirection);
+    int getMovementId(float dx, float dy);
 
   protected:
     sf::Texture unitTexture;
+    GYM::ipos textureId;
+    int textureTick;
+    int currentTextureTick;
 
   public:
     IUnit();

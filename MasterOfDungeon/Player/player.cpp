@@ -10,7 +10,7 @@ Player::Player()
     // Довольно интересный момент в том плане, что
     // SFML не может загрузить изображение из ресурсов, как это делают QPixmap или QImage
 
-    QPixmap pixmap(":/media/unitsTextures/player/demo1.png"); // Но если создать объект QPixmap
+    QPixmap pixmap(":/media/unitsTextures/player/animation_demo1.png"); // Но если создать объект QPixmap
 
     QByteArray bArray;       // Создать объект массива байтов
     QBuffer buffer(&bArray); // Поместить его в буфер
@@ -24,11 +24,15 @@ Player::Player()
     // Устанавливаю текстуру у Shape
     setTexture(&unitTexture);
     // Устанавливаю начальное положение отрисовываемой части текстуры
-    sf::IntRect rect(0, 0, GYM::playerSpriteWidth, GYM::playerSpriteHight);
+
+    int xLeftTop = textureId.x * GYM::playerSpriteWidth;
+    int yLefTtop = textureId.y * GYM::playerSpriteHight;
+
+    sf::IntRect rect(xLeftTop, yLefTtop, GYM::playerSpriteWidth, GYM::playerSpriteHight);
     setTextureRect(rect);
 
     sf::Vector2f size(GYM::playerSpriteWidth, GYM::playerSpriteHight);
     setSize(size);
 
-    setOrigin(GYM::playerSpriteWidth / 2, GYM::playerSpriteHight / 2);
+    setOrigin(GYM::playerSpriteWidth / 2, GYM::playerSpriteHight);
 }

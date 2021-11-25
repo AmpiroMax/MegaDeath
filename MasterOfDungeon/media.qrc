@@ -18,5 +18,6 @@
         <file>media/unitsTextures/player/demo1.png</file>
         <file>media/textures/maptexture.png</file>
         <file>maps/massive_map.txt</file>
+        <file>media/unitsTextures/player/animation_demo1.png</file>
     </qresource>
 </RCC>

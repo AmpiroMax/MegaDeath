@@ -27,8 +27,8 @@ class GameWidget : public QWidget, public sf::RenderWindow
     const TileMap *worldMap;
     Player *player;
 
-    sf::Color clearColor;
     sf::View view;
+    sf::Color clearColor;
     sf::Texture mapTexture;
     sf::Sprite canvasSprite;
 
