@@ -19,7 +19,6 @@
         <file>media/textures/maptexture.png</file>
         <file>maps/massive_map.txt</file>
         <file>media/unitsTextures/player/animation_demo1.png</file>
-        <file>media/menuTextures/buttons_textures.jpg</file>
         <file>media/menuTextures/menu.png</file>
         <file>media/menuTextures/pause.png</file>
         <file>media/menuTextures/over.png</file>
