@@ -6,7 +6,6 @@
 
 #include "tile/tile.h"
 
-//
 
 using TileMatrix = std::vector<std::vector<Tile>>;   // двойной массив тайлов
 using CellVector = std::vector<std::pair<int, int>>; // вектор координат ячеек

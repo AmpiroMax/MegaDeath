@@ -1,7 +1,6 @@
 #ifndef TILE_MAP
 #define TILE_MAP
 
-//
 
 #include <fstream>
 #include <string>

@@ -25,24 +25,30 @@ SOURCES += \
     Game/game.cpp \
     Game/gamewidget.cpp \
     Interfaces/IUnit.cpp \
+    MathLib/math_lib.cpp \
     Player/player.cpp \
     Widgets/mainwidget.cpp \
     Widgets/mainwindow.cpp \
     Widgets/menuwidget.cpp \
+    UnitMap/unit_map.cpp \
     WorldMap/tile/tile.cpp \
     WorldMap/tilemap.cpp \
     main.cpp
 
 
 HEADERS += \
+    Constants/constants.h \
     Game/game.h \
     Game/gamewidget.h \
     Interfaces/IUnit.h \
+    MathLib/math_lib.h \
     Player/player.h \
     Structures/structs.h \
     Widgets/mainwidget.h \
     Widgets/mainwindow.h \
     Widgets/menuwidget.h \
+    UnitMap/unit_map.h \
+    UnitMap/unit_map_constants.h \
     WorldMap/tile/tile.h \
     WorldMap/tile/tile_constants.h \
     WorldMap/tilemap.h \
