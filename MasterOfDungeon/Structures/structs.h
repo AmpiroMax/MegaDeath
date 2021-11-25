@@ -64,8 +64,11 @@ struct Point2D
     Type x;
     Type y;
 
-    friend bool operator== (const Point2D<Type>& lhs, const Point2D<Type>& rhs);
-    friend std::ostream& operator<< (std::ostream& output, const Point2D<Type>& point);
+    template <typename T>
+    friend bool operator== (const Point2D<T>& lhs, const Point2D<T>& rhs);
+
+    template <typename T>
+    friend std::ostream& operator<< (std::ostream& output, const Point2D<T>& point);
 };
 
 template <typename Type>
@@ -74,8 +77,8 @@ Point2D<Type>::Point2D(Type _x, Type _y): x(_x), y(_y) {}
 template <typename Type>
 Point2D<Type>::Point2D(): Point2D(0, 0) {}
 
-template <typename Type>
-bool operator== (const Point2D<Type>& lhs, const Point2D<Type>& rhs)
+template <typename T>
+bool operator== (const Point2D<T>& lhs, const Point2D<T>& rhs)
 {
     if ((lhs.x == rhs.x) && (lhs.y == rhs.y))
         return true;
@@ -83,10 +86,12 @@ bool operator== (const Point2D<Type>& lhs, const Point2D<Type>& rhs)
     return false;
 }
 
-template <typename Type>
-std::ostream& operator<< (std::ostream& output, const Point2D<Type>& point)
+template <typename T>
+std::ostream& operator<< (std::ostream& output, const Point2D<T>& point)
 {
     output << "x, y = " << point.x << ", " << point.y;
+
+    return output;
 }
 
 struct stats

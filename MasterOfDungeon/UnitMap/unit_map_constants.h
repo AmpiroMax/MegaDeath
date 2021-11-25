@@ -10,7 +10,7 @@
 #include "Interfaces/IUnit.h"
 
 
-using GYM::Point2D;
+using namespace GYM;
 
 
 using UnitChunkMap = std::vector<std::vector<std::map<IUnit*, IUnit*>>>;

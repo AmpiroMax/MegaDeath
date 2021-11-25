@@ -151,7 +151,8 @@ bool UnitMap::isAnybodyThere(Point2D<int> tilePos) const
 
         for (auto it = chunk.begin(); it != chunk.end(); ++it)
         {
-            if (getUnitTilePos(it->second) == tilePos)
+            Point2D<int> currPos = getUnitTilePos(it->second);
+            if (currPos == tilePos)
                 return true;
         }
     }
