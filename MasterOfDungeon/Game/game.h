@@ -2,8 +2,8 @@
 #define GAME_H
 
 #include "Player/player.h"
+#include "Widgets/mainwindow.h"
 #include "WorldMap/tilemap.h"
-#include "gamewidget.h"
 
 #include <QApplication>
 #include <QWidget>
@@ -12,14 +12,14 @@ class Game
 {
   private:
     QApplication application;
-    GameWidget *gameWidget;
+    MainWindow *window;
     TileMap *worldMap;
     Player *player;
 
+    void initGame();
+
   public:
     Game(int argc, char *argv[]);
-
-    void initGame();
 
     int execGame();
 };

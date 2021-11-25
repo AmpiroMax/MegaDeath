@@ -26,6 +26,9 @@ SOURCES += \
     Game/gamewidget.cpp \
     Interfaces/IUnit.cpp \
     Player/player.cpp \
+    Widgets/mainwidget.cpp \
+    Widgets/mainwindow.cpp \
+    Widgets/menuwidget.cpp \
     WorldMap/tile/tile.cpp \
     WorldMap/tilemap.cpp \
     main.cpp
@@ -37,6 +40,9 @@ HEADERS += \
     Interfaces/IUnit.h \
     Player/player.h \
     Structures/structs.h \
+    Widgets/mainwidget.h \
+    Widgets/mainwindow.h \
+    Widgets/menuwidget.h \
     WorldMap/tile/tile.h \
     WorldMap/tile/tile_constants.h \
     WorldMap/tilemap.h \

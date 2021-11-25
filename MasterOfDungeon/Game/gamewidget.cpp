@@ -17,7 +17,7 @@ GameWidget::GameWidget(QWidget *parent)
     setAttribute(Qt::WA_NoSystemBackground);
 
     isInited = false;
-    timer.setInterval(20);
+    timer.setInterval(15);
     clearColor = sf::Color(100, 0, 0);
 }
 
