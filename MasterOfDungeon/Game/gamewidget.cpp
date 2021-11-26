@@ -42,10 +42,16 @@ void GameWidget::drawMap()
     for (size_t i = 0; i < mapMatrix.size(); i++)
         for (size_t j = 0; j < mapMatrix[0].size(); j++)
         {
-            if (!mapMatrix[i][j].isPassible())
-                canvasSprite.setTextureRect(sf::IntRect(0, 0, GYM::tileSize, GYM::tileSize));
+            if (mapMatrix[i][j].isPassible())
+            {
+                canvasSprite.setTextureRect(
+                    sf::IntRect(mapMatrix[i][j].getTextureId() * GYM::tileSize, 0, GYM::tileSize, GYM::tileSize));
+            }
             else
-                canvasSprite.setTextureRect(sf::IntRect(GYM::tileSize, 0, GYM::tileSize, GYM::tileSize));
+            {
+                canvasSprite.setTextureRect(sf::IntRect(mapMatrix[i][j].getTextureId() * GYM::tileSize, GYM::tileSize,
+                                                        GYM::tileSize, GYM::tileSize));
+            }
 
             canvasSprite.setPosition(i * GYM::tileSize, j * GYM::tileSize);
             draw(canvasSprite);
