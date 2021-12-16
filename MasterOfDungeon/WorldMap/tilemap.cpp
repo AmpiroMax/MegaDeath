@@ -56,7 +56,7 @@ TileMap::TileMap(const std::string &filename)
     input.close();
 }
 
-Shape TileMap::shape() const
+GYM::Point2D<size_t> TileMap::shape() const
 /*
 
 Эта функция возвращает размеры карты
@@ -69,12 +69,13 @@ Shape TileMap::shape() const
 {
     if (_map.empty())
     {
-        return ELEMENTARY_SHAPE;
+        size_t zero = 0;
+        return GYM::Point2D(zero, zero);
     }
 
     else
     {
-        return {_map.size(), _map[0].size()};
+        return GYM::Point2D(_map.size(), _map[0].size());
     }
 }
 
@@ -128,7 +129,7 @@ CellVector TileMap::getShortestWay(Cell from, Cell to) const
         currCell = cameFrom[currCell];
     }
 
-    std::reverse(route.begin(), route.end());
+    //  std::reverse(route.begin(), route.end());
 
     return route;
 }
@@ -162,6 +163,9 @@ void TileMap::printMap() const
     }
 }
 
+#include <iostream>
+using namespace std;
+
 TileMatrix TileMap::getLocalMap(Cell coord, int topLen, int bttmLen, int leftLen, int rightLen) const
 /*
 
@@ -180,7 +184,10 @@ TileMatrix TileMap::getLocalMap(Cell coord, int topLen, int bttmLen, int leftLen
 */
 {
     TileMatrix localMap;
-    Shape shp = shape();
+    Shape shp = {shape().x, shape().y};
+
+    // cout << coord.first << " " << coord.second << endl;
+    // cout << shp.first << " " << shp.second << endl;
 
     if (_isCoordCorrect(coord, shp, {0, 0}))
     {
@@ -188,6 +195,8 @@ TileMatrix TileMap::getLocalMap(Cell coord, int topLen, int bttmLen, int leftLen
         int vertMin = std::max(coord.first - bttmLen, 0);
         int horMin = std::max(coord.second - leftLen, 0);
         int horMax = std::min(coord.second + rightLen, shp.second);
+
+        cout << vertMin << " " << vertMax << ", " << horMin << " " << horMax << endl;
 
         for (int i = vertMin; i < vertMax; ++i)
         {
@@ -236,7 +245,7 @@ CellVector TileMap::_getAdjacentCells(int x, int y) const
 {
     // преобразование координат?
 
-    int lenght = shape().first, width = shape().second;
+    int lenght = shape().x, width = shape().y;
 
     CellVector adjacentCells;
 

@@ -1,10 +1,9 @@
 #ifndef GAMEWIDGET_H
 #define GAMEWIDGET_H
 
-#include "Interfaces/IUnit.h"
 #include "Player/player.h"
+#include "UnitMap/unit_map.h"
 #include "WorldMap/tilemap.h"
-#include "WorldMap/tilemap_constants.h"
 
 #include "SFML/Graphics.hpp"
 #include "SFML/Graphics/RenderWindow.hpp"
@@ -14,47 +13,40 @@
 #include <QEvent>
 #include <QMouseEvent>
 #include <QPixmap>
-#include <QTimer>
 #include <QWidget>
 
-#include <algorithm>
 #include <vector>
 
 class GameWidget : public QWidget, public sf::RenderWindow
 {
     Q_OBJECT
   private:
-    const TileMap *worldMap;
-    Player *player;
-
-    sf::View view;
-    sf::Color clearColor;
     sf::Texture mapTexture;
     sf::Sprite canvasSprite;
-
-    QTimer timer;
-
-    bool isInited;
+    sf::View view;
 
   public:
     explicit GameWidget(QWidget *parent = nullptr);
 
-    void initMapPlayer(const TileMap *, Player *);
-    void drawMap();
+    void drawMap(const TileMatrix &localMap, const Cell playerPos);
+    void drawUnits(const UnitChunk &localUnits);
+    void drawPlayer(const Player *player);
+
+    void setViewPosition(sf::Vector2f);
+    void setViewSize(int width, int height);
 
   private:
     virtual QPaintEngine *paintEngine() const override;
     virtual void paintEvent(QPaintEvent *) override;
+    virtual void mousePressEvent(QMouseEvent *) override;
     virtual void showEvent(QShowEvent *) override;
     virtual void resizeEvent(QResizeEvent *) override;
 
-    virtual void mousePressEvent(QMouseEvent *) override;
-
-    void calculatePath(GYM::fpos);
-    void movePlayer(GYM::ipos);
-
-  private slots:
-    void onTimeout();
+  signals:
+    void paintEventSignal();
+    void mouseEventSignal(GYM::Point2D<int>);
+    void showEventSignal();
+    void resizeEventSignal();
 };
 
 #endif // GAMEWIDGET_H

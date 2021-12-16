@@ -2,26 +2,41 @@
 
 #include <QThread>
 
-Game::Game(int argc, char *argv[]) : application(argc, argv)
+Game::Game(int argc, char *argv[]) : app(argc, argv)
 {
     player = new Player();
-    worldMap = new TileMap(":/maps/massive_map.txt");
-    window = new MainWindow();
+    gameWidget = new GameWidget();
 
-    window->initGameWidget(worldMap, player);
+    WM = new TileMap(":/maps/massive_map.txt");
+    UM = new UnitMap(WM->shape());
 
-    application.setActiveWindow(window);
-    initGame();
+    PLC = new PlayerController();
+    GC = new GraphicController();
+
+    GC->initParametrs(gameWidget, WM, UM, player, PLC);
+    PLC->initParametrs(player, WM, UM);
+    app.setActiveWindow(gameWidget);
+
+    // Соединяю сигнал таймера со слотом этого виджета.
+    gameTimer.setInterval(15);
+    connect(&gameTimer, &QTimer::timeout, this, &Game::timeOut);
 }
 
 void Game::initGame()
 {
-    player->setPosition(GYM::tileSize * 13.5, GYM::tileSize * 13.5);
-    player->setVelocity(GYM::fpos(4, 4));
 }
 
 int Game::execGame()
 {
-    window->show();
-    return application.exec();
+    // Запускаю таймер
+    gameTimer.start();
+    gameWidget->show();
+
+    return app.exec();
+}
+
+void Game::timeOut()
+{
+    GC->onTimeOutEvent();
+    PLC->onTimeOutEvent();
 }

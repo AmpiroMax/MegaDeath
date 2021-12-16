@@ -1,8 +1,7 @@
-#include "MathLib/math_lib.h"
 #include "unit_map.h"
+#include "MathLib/math_lib.h"
 
-
-UnitMap::UnitMap(Point2D<int> shape)
+UnitMap::UnitMap(Point2D<size_t> shape)
 {
     for (int i = 0; i < shape.x; ++i)
     {
@@ -11,7 +10,6 @@ UnitMap::UnitMap(Point2D<int> shape)
         _map.push_back((unitChunk));
     }
 }
-
 
 Point2D<int> UnitMap::shape() const
 /*
@@ -33,7 +31,6 @@ Point2D<int> UnitMap::shape() const
     return shape;
 }
 
-
 void UnitMap::addUnit(IUnit *unit)
 /*
  Эта функция добавляет переданного юнита в чанк, в котором он находится
@@ -53,7 +50,6 @@ void UnitMap::addUnit(IUnit *unit)
             _map[pos.x][pos.y][unit] = unit;
     }
 }
-
 
 void UnitMap::deleteUnit(IUnit *unit)
 /*
@@ -80,8 +76,7 @@ void UnitMap::deleteUnit(IUnit *unit)
     }
 }
 
-
-void UnitMap::moveUnit(Point2D<int> from, IUnit* unit)
+void UnitMap::moveUnit(Point2D<int> from, IUnit *unit)
 /*
 
   Эта функция перемещает данного юнита из заданного чанка в
@@ -93,7 +88,8 @@ void UnitMap::moveUnit(Point2D<int> from, IUnit* unit)
   :return: ничего не возвращает
 */
 {
-    if (!unit) return;
+    if (!unit)
+        return;
 
     Point2D<int> shp = shape();
     Point2D<int> nil;
@@ -109,7 +105,6 @@ void UnitMap::moveUnit(Point2D<int> from, IUnit* unit)
         }
     }
 }
-
 
 UnitChunk UnitMap::getLocalUnitMap(Point2D<int> chunkPos) const
 /*
@@ -129,7 +124,6 @@ UnitChunk UnitMap::getLocalUnitMap(Point2D<int> chunkPos) const
 
     return localMap;
 }
-
 
 bool UnitMap::isAnybodyThere(Point2D<int> tilePos) const
 /*

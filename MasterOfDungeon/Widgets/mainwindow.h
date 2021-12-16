@@ -18,7 +18,6 @@ class MainWindow : public QMainWindow
     Q_OBJECT
   private:
     MainWidget *centralWidget;
-    MenuWidget *menuWidget;
     QToolBar *toolbar;
 
   public:
@@ -26,8 +25,6 @@ class MainWindow : public QMainWindow
     void initGameWidget(const TileMap *, Player *);
 
   private slots:
-    void showMenu();
-
     void startGame();
     void continueGame();
 };

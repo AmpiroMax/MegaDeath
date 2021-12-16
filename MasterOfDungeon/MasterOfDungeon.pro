@@ -22,6 +22,8 @@ INCLUDEPATH += $$PWD/SFML/include/
 DEPENDPATH +=  $$PWD/SFML/include/
 
 SOURCES += \
+    Controllers/graphiccontroller.cpp \
+    Controllers/playercontroller.cpp \
     Game/game.cpp \
     Game/gamewidget.cpp \
     Interfaces/IUnit.cpp \
@@ -38,6 +40,8 @@ SOURCES += \
 
 HEADERS += \
     Constants/constants.h \
+    Controllers/graphiccontroller.h \
+    Controllers/playercontroller.h \
     Game/game.h \
     Game/gamewidget.h \
     Interfaces/IUnit.h \

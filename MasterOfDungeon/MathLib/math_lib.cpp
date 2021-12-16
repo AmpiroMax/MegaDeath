@@ -1,7 +1,6 @@
 #include "math_lib.h"
 
-bool isCoordInArea(Point2D<int> coord, Point2D<int> topLim,
-                   Point2D<int> bttmLim)
+bool isCoordInArea(Point2D<int> coord, Point2D<int> topLim, Point2D<int> bttmLim)
 /*
 
   Эта функция проверяет принадлежит ли заданная координата указанной области
@@ -23,8 +22,7 @@ bool isCoordInArea(Point2D<int> coord, Point2D<int> topLim,
     return true;
 }
 
-
-Point2D<int> getUnitPixelPos(IUnit* unit)
+Point2D<int> getUnitPixelPos(const IUnit *unit)
 /*
  Эта функция расчитывает позицию юнита в пикселях
 
@@ -46,8 +44,7 @@ Point2D<int> getUnitPixelPos(IUnit* unit)
     return pos;
 }
 
-
-Point2D<int> getUnitChunkPos(IUnit* unit)
+Point2D<int> getUnitChunkPos(const IUnit *unit)
 /*
  Эта функция расчитывает позицию юнита в чанках
 
@@ -69,8 +66,7 @@ Point2D<int> getUnitChunkPos(IUnit* unit)
     return pos;
 }
 
-
-Point2D<int> getUnitTilePos(IUnit* unit)
+Point2D<int> getUnitTilePos(const IUnit *unit)
 /*
  Эта функция расчитывает позицию юнита в тайлах
 
@@ -92,7 +88,6 @@ Point2D<int> getUnitTilePos(IUnit* unit)
     return pos;
 }
 
-
 Point2D<int> convertPixelPosToChunkPos(Point2D<int> pos)
 /*
   Эта функция переводит координаты текущей позиции из пикселей в чанки
@@ -105,7 +100,6 @@ Point2D<int> convertPixelPosToChunkPos(Point2D<int> pos)
     return convertPixelPosToNonPixel(pos, chunkSize);
 }
 
-
 Point2D<int> convertPixelPosToTilePos(Point2D<int> pos)
 /*
   Эта функция переводит координаты текущей позиции из пикселей в тайлы
@@ -117,7 +111,6 @@ Point2D<int> convertPixelPosToTilePos(Point2D<int> pos)
 {
     return convertPixelPosToNonPixel(pos, tileSize);
 }
-
 
 Point2D<int> convertChunkPosToPixelPos(Point2D<int> pos)
 /*
@@ -143,7 +136,6 @@ Point2D<int> convertTilePosToPixelPos(Point2D<int> pos)
     return convertNonPixelPosToPixel(pos, tileSize);
 }
 
-
 Point2D<int> convertPixelPosToNonPixel(Point2D<int> pos, int segmentation)
 /*
  Эта функция переводит координаты из пикселей в другие единицы измерения
@@ -154,13 +146,13 @@ Point2D<int> convertPixelPosToNonPixel(Point2D<int> pos, int segmentation)
  :return: Point2D<int> - позиция в новых единицах измерения
 */
 {
-    if (!segmentation) return pos;
+    if (!segmentation)
+        return pos;
 
     Point2D convPos(pos.x / segmentation, pos.y / segmentation);
 
     return convPos;
 }
-
 
 Point2D<int> convertNonPixelPosToPixel(Point2D<int> pos, int segmentation)
 /*

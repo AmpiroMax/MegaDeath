@@ -1,11 +1,11 @@
 #ifndef TILE_MAP
 #define TILE_MAP
 
-
 #include <fstream>
 #include <string>
 #include <vector>
 
+#include "Structures/structs.h"
 #include "tile/tile.h"
 #include "tilemap_constants.h"
 
@@ -30,10 +30,9 @@ class TileMap
     TileMap &operator=(const TileMap &) = delete;
 
     CellVector getShortestWay(Cell from, Cell to) const;
-    TileMatrix getLocalMap(Cell coord, int topLen, int bttmLen, int leftLen,
-                           int rightLen) const;
+    TileMatrix getLocalMap(Cell coord, int topLen, int bttmLen, int leftLen, int rightLen) const;
     TileMatrix getCentredLocalMap(Cell centre, int vertLen, int horLen) const;
-    Shape shape() const;
+    GYM::Point2D<size_t> shape() const;
 
     void printMap() const;
 
