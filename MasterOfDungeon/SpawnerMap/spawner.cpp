@@ -24,13 +24,22 @@ int Spawner::getSpawnerType()
 
 Enemy *Spawner::createEnemy()
 {
+    // Функция создающая при вызове определенного противника
+
+    // Если число уже существующих от этого спавнера юнитов
+    // равно максимальному возможному их числу, то более никого не создаем
     if (currentUnitCount == maxUnitCount)
         return nullptr;
-    currentUnitCount += 1;
-    Director director(position);
 
+    // Создали юнита -> увеличили из число от этого спавнера на 1
+    currentUnitCount += 1;
+
+    // Создаем директора
+    Director director(position);
+    // СОздаем строителя
     IEnemyBuilder *builder;
 
+    // В зависимости от типа спавнера создаём того или ного строителя
     switch (spawnerType)
     {
         case 1:
@@ -50,10 +59,12 @@ Enemy *Spawner::createEnemy()
         }
     }
 
+    // Каждого второго юнита мы будем делать безумным
     if (currentUnitCount == 2)
         director.constructCrazyEnemy(builder);
     else
         director.constructNormalEnemy(builder);
 
+    // Возвращаем нового юнита, которого мы создали
     return builder->getResult();
 }

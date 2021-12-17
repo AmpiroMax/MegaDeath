@@ -5,6 +5,10 @@
 #include "Structures/structs.h"
 
 #include <QString>
+
+// Интерефейсный класс, который описывает по каким правилам
+// будут создаваться объекты Enemy
+
 class IEnemyBuilder
 {
   public:

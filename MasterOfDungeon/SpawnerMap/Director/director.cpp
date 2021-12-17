@@ -7,6 +7,8 @@ Director::Director(Cell _enemyLocation)
 
 void Director::constructNormalEnemy(IEnemyBuilder *builder)
 {
+    // Директор берет builder, который ему передали и строит Enemy с нормальнами характеристиками и параметрами
+
     builder->reset();
 
     GYM::stats normStats = {100, 100, 10, 10, 10};
@@ -20,6 +22,8 @@ void Director::constructNormalEnemy(IEnemyBuilder *builder)
 
 void Director::constructCrazyEnemy(IEnemyBuilder *builder)
 {
+    // Директор берет builder, который ему передали и строит Enemy с сумашедшими характеристиками и параметрами
+
     builder->reset();
 
     GYM::stats crazyStats = {1000, 1000, 100, 100, 100};
