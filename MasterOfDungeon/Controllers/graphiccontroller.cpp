@@ -15,6 +15,7 @@ void GraphicController::initParametrs(GameWidget *_gameWidget, const TileMap *_W
 
     connect(gameWidget, &GameWidget::paintEventSignal, this, &GraphicController::onPaintEvent);
     connect(gameWidget, &GameWidget::mouseEventSignal, this, &GraphicController::onMouseClickEvent);
+    connect(gameWidget, &GameWidget::keyPressEventSignal, this, &GraphicController::onKeyPressEvent);
     connect(gameWidget, &GameWidget::showEventSignal, this, &GraphicController::onShowEvent);
     connect(gameWidget, &GameWidget::resizeEventSignal, this, &GraphicController::onResizeEvent);
 }
@@ -29,35 +30,58 @@ void GraphicController::processMouseEvents(Cell mouseCell)
     PLC->recalculatePath(mouseCell);
 }
 
-#include <iostream>
-using namespace std;
+void GraphicController::processKeyboardEvents(int code)
+{
+    switch (code)
+    {
+        case Qt::Key_Z:
+        {
+            gameWidget->setViewZoom(1.1);
+            break;
+        }
+        case Qt::Key_X:
+        {
+            gameWidget->setViewZoom(0.9);
+            break;
+        }
+    }
+}
+
+Cell GraphicController::calculateMarginForMap(const TileMatrix &localMap, int marginSize)
+{
+    GYM::Point2D<int> tmp = getUnitTilePos(player);
+    Cell playerPosition = {tmp.x, tmp.y};
+
+    GYM::Point2D<int> shape(WM->shape().x, WM->shape().y);
+    int horMapSize = localMap.size();
+    int verMapSize = localMap[0].size();
+
+    int deltaX = 0;
+    int deltaY = 0;
+
+    if (shape.x - playerPosition.first > marginSize)
+        deltaX = std::min(horMapSize / 2, playerPosition.first);
+    else
+        deltaX = horMapSize - shape.x + playerPosition.first;
+
+    if (shape.y - playerPosition.second > marginSize)
+        deltaY = std::min(verMapSize / 2, playerPosition.second);
+    else
+        deltaY = verMapSize - shape.y + playerPosition.second;
+
+    return Cell(playerPosition.first - deltaX, playerPosition.second - deltaY);
+}
 
 void GraphicController::paint()
 {
     GYM::Point2D<int> tmp = getUnitTilePos(player);
     Cell playerPosition = {tmp.x, tmp.y};
 
-    TileMatrix localWM = WM->getCentredLocalMap(playerPosition, 20, 20);
-    UnitChunk localUM = UM->getLocalUnitMap(tmp);
+    TileMatrix localWM = WM->getCentredLocalMap(playerPosition, 100, 100);
+    GYM::Point2D<int> playerChunk = getUnitChunkPos(player);
+    UnitChunk localUM = UM->getLocalUnitMap(playerChunk);
 
-    GYM::Point2D<size_t> shape = WM->shape();
-    int horMapSize = localWM.size();
-    int verMapSize = localWM[0].size();
-
-    int deltaX =
-        ((int(shape.x) - playerPosition.first > playerPosition.first) ? std::min(horMapSize / 2, playerPosition.first)
-                                                                      : 20);
-    int deltaY = ((int(shape.y) - playerPosition.second > playerPosition.second)
-                      ? std::min(verMapSize / 2, playerPosition.second)
-                      : 20);
-
-    cout << "deltas " << deltaX << " " << deltaY << endl;
-
-    int x0 = playerPosition.first - deltaX;
-    int y0 = playerPosition.second - deltaY;
-
-    Cell X0Y0(x0, y0);
-    cout << "XoYo " << x0 << " " << y0 << endl;
+    Cell X0Y0 = calculateMarginForMap(localWM, 100);
 
     gameWidget->clear();
     gameWidget->setViewPosition(player->getPosition());
@@ -84,6 +108,11 @@ void GraphicController::onMouseClickEvent(GYM::Point2D<int> pos)
     int ym = (pos.y - height / 2) / GYM::tileSize + playerCell.second;
 
     processMouseEvents(Cell(xm, ym));
+}
+
+void GraphicController::onKeyPressEvent(int code)
+{
+    processKeyboardEvents(code);
 }
 
 void GraphicController::onShowEvent()

@@ -26,5 +26,8 @@
         <file>media/menuTextures/exit.png</file>
         <file>media/menuTextures/toolbar2.png</file>
         <file>media/menuTextures/menu_background_image.jpg</file>
+        <file>media/unitsTextures/player/animation_demo_2.png</file>
+        <file>maps/dungeon.txt</file>
+        <file>media/unitsTextures/golem/normal_golem.png</file>
     </qresource>
 </RCC>

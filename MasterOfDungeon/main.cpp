@@ -2,7 +2,7 @@
 
 int main(int argc, char *argv[])
 {
-    Game game(argc, argv);
+    Game &game = Game::Instance(argc, argv);
     game.initGame();
     return game.execGame();
 }

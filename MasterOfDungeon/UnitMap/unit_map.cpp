@@ -31,7 +31,7 @@ Point2D<int> UnitMap::shape() const
     return shape;
 }
 
-void UnitMap::addUnit(IUnit *unit)
+void UnitMap::addUnit(Enemy *unit)
 /*
  Эта функция добавляет переданного юнита в чанк, в котором он находится
 
@@ -51,7 +51,7 @@ void UnitMap::addUnit(IUnit *unit)
     }
 }
 
-void UnitMap::deleteUnit(IUnit *unit)
+void UnitMap::deleteUnit(Enemy *unit)
 /*
  Эта функция удаляет переданного юнита из чанка, в котором он находится
 
@@ -76,7 +76,7 @@ void UnitMap::deleteUnit(IUnit *unit)
     }
 }
 
-void UnitMap::moveUnit(Point2D<int> from, IUnit *unit)
+void UnitMap::moveUnit(Point2D<int> from, Enemy *unit)
 /*
 
   Эта функция перемещает данного юнита из заданного чанка в
@@ -115,14 +115,23 @@ UnitChunk UnitMap::getLocalUnitMap(Point2D<int> chunkPos) const
  :return: UnitChunk - словарь юнитов данного чанка
 */
 {
-    UnitChunk localMap;
-    Point2D<int> shp = shape();
-    Point2D<int> nil;
+    //    UnitChunk localMap;
+    //    Point2D<int> shp = shape();
+    //    Point2D<int> nil;
 
-    if (isCoordInArea(chunkPos, shp, nil))
-        localMap = _map[chunkPos.x][chunkPos.y];
+    //    if (isCoordInArea(chunkPos, shp, nil))
+    //        localMap = _map[chunkPos.y][chunkPos.x];
 
-    return localMap;
+    //    return localMap;
+    for (int i = 0; i < _map.size(); ++i)
+    {
+        for (int j = 0; j < _map[0].size(); ++j)
+            if (_map[i][j].size() != 0)
+            {
+                return _map[i][j];
+            }
+    }
+    return _map[0][0];
 }
 
 bool UnitMap::isAnybodyThere(Point2D<int> tilePos) const

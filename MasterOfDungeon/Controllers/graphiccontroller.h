@@ -31,11 +31,14 @@ class GraphicController : public QObject
 
   private:
     void processMouseEvents(Cell);
+    void processKeyboardEvents(int code);
+    Cell calculateMarginForMap(const TileMatrix &localMap, int marginSize = 20);
     void paint();
 
   private slots:
     void onPaintEvent();
     void onMouseClickEvent(GYM::Point2D<int>);
+    void onKeyPressEvent(int code);
     void onShowEvent();
     void onResizeEvent();
 };

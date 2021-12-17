@@ -6,7 +6,7 @@ bool isCoordInArea(Point2D<int> coord, Point2D<int> topLim, Point2D<int> bttmLim
   Эта функция проверяет принадлежит ли заданная координата указанной области
 
   :param: Point2D<int> coord - проверяемая координата
-  :param: Point2D<int>- границы сверху по x и y
+  :param: Point2D<int> - границы сверху по x и y
   :param: Point2D<int> - границы снизу по x и y
 
   :return: true, если точка не выходит за границы, иначе - false

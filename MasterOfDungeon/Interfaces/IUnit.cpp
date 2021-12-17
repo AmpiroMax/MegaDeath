@@ -37,43 +37,32 @@ void IUnit::changeTextureRect(int j)
 
 int IUnit::getMovementId(float dx, float dy)
 {
-    // проверка на случай неправильных данных
-    if (dx == 0 && dy == 0)
-        return 0;
-
-    // движение вверх
-    if (dx == 0 && dy < 0)
-        return 3;
-
-    // движение вниз
-    if (dx == 0 && dy > 0)
-        return 0;
-
-    // движение направо
-    if (dy == 0 && dx > 0)
-        return 1;
-
-    // движение налево
-    if (dy == 0 && dx < 0)
-        return 2;
-
-    // движение направо
-    if (dx > 0 && abs(dy / dx) < 1)
-        return 1;
-
-    // движение налево
-    if (dx < 0 && abs(dy / dx) < 1)
-        return 2;
-
-    // движение вверх
-    if (dy < 0 && abs(dy / dx) > 1)
-        return 3;
-
-    // движение вниз
-    if (dy > 0 && abs(dy / dx) > 1)
-        return 0;
-
-    return 0;
+    if (dx > 0)
+    {
+        if (dy == 0)
+            return 4;
+        if (dy < 0)
+            return 3;
+        if (dy > 0)
+            return 5;
+    }
+    if (dx == 0)
+    {
+        if (dy < 0)
+            return 2;
+        if (dy > 0)
+            return 6;
+    }
+    if (dx < 0)
+    {
+        if (dy == 0)
+            return 0;
+        if (dy < 0)
+            return 1;
+        if (dy > 0)
+            return 7;
+    }
+    return -1;
 }
 
 IUnit::IUnit()

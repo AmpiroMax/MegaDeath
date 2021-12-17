@@ -11,6 +11,7 @@
 #include <QBuffer>
 #include <QByteArray>
 #include <QEvent>
+#include <QKeyEvent>
 #include <QMouseEvent>
 #include <QPixmap>
 #include <QWidget>
@@ -34,10 +35,12 @@ class GameWidget : public QWidget, public sf::RenderWindow
 
     void setViewPosition(sf::Vector2f);
     void setViewSize(int width, int height);
+    void setViewZoom(float zoomFactor);
 
   private:
     virtual QPaintEngine *paintEngine() const override;
     virtual void paintEvent(QPaintEvent *) override;
+    virtual void keyPressEvent(QKeyEvent *) override;
     virtual void mousePressEvent(QMouseEvent *) override;
     virtual void showEvent(QShowEvent *) override;
     virtual void resizeEvent(QResizeEvent *) override;
@@ -45,6 +48,7 @@ class GameWidget : public QWidget, public sf::RenderWindow
   signals:
     void paintEventSignal();
     void mouseEventSignal(GYM::Point2D<int>);
+    void keyPressEventSignal(int code);
     void showEventSignal();
     void resizeEventSignal();
 };

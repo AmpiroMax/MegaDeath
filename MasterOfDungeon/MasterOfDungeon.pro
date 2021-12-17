@@ -22,13 +22,24 @@ INCLUDEPATH += $$PWD/SFML/include/
 DEPENDPATH +=  $$PWD/SFML/include/
 
 SOURCES += \
+    Controllers/enemycontroller.cpp \
     Controllers/graphiccontroller.cpp \
     Controllers/playercontroller.cpp \
+    Controllers/spawnercontroller.cpp \
     Game/game.cpp \
     Game/gamewidget.cpp \
     Interfaces/IUnit.cpp \
     MathLib/math_lib.cpp \
+    Player/Enemies/golem.cpp \
+    Player/Enemies/juk.cpp \
+    Player/Enemies/skeleton.cpp \
+    Player/enemy.cpp \
     Player/player.cpp \
+    SpawnerMap/Director/director.cpp \
+    SpawnerMap/Director/golembuilder.cpp \
+    SpawnerMap/Director/skeletonbuilder.cpp \
+    SpawnerMap/spawner.cpp \
+    SpawnerMap/spawnermap.cpp \
     Widgets/mainwidget.cpp \
     Widgets/mainwindow.cpp \
     Widgets/menuwidget.cpp \
@@ -40,13 +51,26 @@ SOURCES += \
 
 HEADERS += \
     Constants/constants.h \
+    Controllers/enemycontroller.h \
     Controllers/graphiccontroller.h \
     Controllers/playercontroller.h \
+    Controllers/spawnercontroller.h \
     Game/game.h \
     Game/gamewidget.h \
+    Interfaces/IEnemyBuilder.h \
     Interfaces/IUnit.h \
     MathLib/math_lib.h \
+    Player/Enemies/golem.h \
+    Player/Enemies/juk.h \
+    Player/Enemies/skeleton.h \
+    Player/enemy.h \
     Player/player.h \
+    SpawnerMap/Director/director.h \
+    SpawnerMap/Director/golembuilder.h \
+    SpawnerMap/Director/skeletonbuilder.h \
+    SpawnerMap/spawner.h \
+    SpawnerMap/spawner_map_constants.h \
+    SpawnerMap/spawnermap.h \
     Structures/structs.h \
     Widgets/mainwidget.h \
     Widgets/mainwindow.h \

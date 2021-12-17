@@ -1,16 +1,16 @@
-#include "player.h"
+#include "enemy.h"
 
-#include <QBuffer>
-#include <QByteArray>
-#include <QPixmap>
+Enemy::Enemy()
+{
+}
 
-Player::Player()
+void Enemy::setEnemyTexture(QString textureName)
 {
     // Загрузка изображения из ресурсных файлов Qt
     // Довольно интересный момент в том плане, что
     // SFML не может загрузить изображение из ресурсов, как это делают QPixmap или QImage
 
-    QPixmap pixmap(":/media/unitsTextures/player/animation_demo_2.png"); // Но если создать объект QPixmap
+    QPixmap pixmap(textureName); // Но если создать объект QPixmap
 
     QByteArray bArray;       // Создать объект массива байтов
     QBuffer buffer(&bArray); // Поместить его в буфер
@@ -35,4 +35,18 @@ Player::Player()
     setSize(size);
 
     setOrigin(GYM::playerSpriteWidth / 2, GYM::playerSpriteHight);
+}
+
+void Enemy::updateLogicState(const Cell &pp)
+{
+    Point2D<int> myPos = getUnitTilePos(this);
+    if ((pp.first - myPos.x) * (pp.first - myPos.x) + (pp.second - myPos.y) * (pp.second - myPos.y) < 7 * 7)
+        logicState = 1;
+    else
+        logicState = 0;
+}
+
+int Enemy::getLogicState()
+{
+    return logicState;
 }

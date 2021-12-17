@@ -48,7 +48,6 @@ void GameWidget::drawMap(const TileMatrix &localMap, const Cell X0Y0)
                                                         GYM::tileSize, GYM::tileSize));
             }
 
-            // canvasSprite.setPosition((i)*GYM::tileSize, (j)*GYM::tileSize);
             canvasSprite.setPosition((i + X0Y0.first) * GYM::tileSize, (j + X0Y0.second) * GYM::tileSize);
             draw(canvasSprite);
         }
@@ -78,6 +77,11 @@ void GameWidget::setViewSize(int width, int height)
     view.setSize(size().width(), size().height());
 }
 
+void GameWidget::setViewZoom(float zoomFactor)
+{
+    view.zoom(zoomFactor);
+}
+
 QPaintEngine *GameWidget::paintEngine() const
 {
     // В силу того, что мы рисуем в окне через SFML, были установлены
@@ -91,6 +95,11 @@ QPaintEngine *GameWidget::paintEngine() const
 void GameWidget::paintEvent(QPaintEvent *)
 {
     emit paintEventSignal();
+}
+
+void GameWidget::keyPressEvent(QKeyEvent *event)
+{
+    emit keyPressEventSignal(event->key());
 }
 
 void GameWidget::mousePressEvent(QMouseEvent *event)

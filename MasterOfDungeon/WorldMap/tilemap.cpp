@@ -163,9 +163,6 @@ void TileMap::printMap() const
     }
 }
 
-#include <iostream>
-using namespace std;
-
 TileMatrix TileMap::getLocalMap(Cell coord, int topLen, int bttmLen, int leftLen, int rightLen) const
 /*
 
@@ -186,17 +183,12 @@ TileMatrix TileMap::getLocalMap(Cell coord, int topLen, int bttmLen, int leftLen
     TileMatrix localMap;
     Shape shp = {shape().x, shape().y};
 
-    // cout << coord.first << " " << coord.second << endl;
-    // cout << shp.first << " " << shp.second << endl;
-
     if (_isCoordCorrect(coord, shp, {0, 0}))
     {
         int vertMax = std::min(coord.first + topLen, shp.first);
         int vertMin = std::max(coord.first - bttmLen, 0);
         int horMin = std::max(coord.second - leftLen, 0);
         int horMax = std::min(coord.second + rightLen, shp.second);
-
-        cout << vertMin << " " << vertMax << ", " << horMin << " " << horMax << endl;
 
         for (int i = vertMin; i < vertMax; ++i)
         {
