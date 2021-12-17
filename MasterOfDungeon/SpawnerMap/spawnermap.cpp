@@ -8,7 +8,7 @@ SpawnerMap::SpawnerMap(Point2D<size_t> _shape)
     shape.x = _shape.x / GYM::chunkSize;
     shape.y = _shape.y / GYM::chunkSize;
 
-    for (int i = 0; i < shape.x; ++i)
+    for (size_t i = 0; i < shape.x; ++i)
     {
         SpawnerArray spawnerChunk(shape.y);
 
@@ -19,9 +19,9 @@ SpawnerMap::SpawnerMap(Point2D<size_t> _shape)
 void SpawnerMap::initializeSpawners(const TileMap *WM)
 {
     // инициализируем спавнеры
-    for (int i = 0; i < shape.x; ++i)
+    for (size_t i = 0; i < shape.x; ++i)
     {
-        for (int j = 0; j < shape.y; ++j)
+        for (size_t j = 0; j < shape.y; ++j)
         {
             // этим условием конролируем число спавнеров и их распространнёность
             // на данном этапе реализовано так, в дальнейшем расположение спавнеров и их тип
@@ -45,9 +45,9 @@ SpawnerArray SpawnerMap::getLocalSpawnersMap(Point2D<int> chunkPos, int AreaLen)
     // на реализацию этого класса
     SpawnerArray localMap;
 
-    for (int i = 0; i < shape.x; ++i)
+    for (size_t i = 0; i < shape.x; ++i)
     {
-        for (int j = 0; j < shape.y; ++j)
+        for (size_t j = 0; j < shape.y; ++j)
         {
             if (_map[i][j])
                 localMap.push_back(_map[i][j]);
